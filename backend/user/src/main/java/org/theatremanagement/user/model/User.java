@@ -11,5 +11,6 @@ public class User {
     private int age;
     private Gender gender;
     private long phoneNumber;
+    private String id;
 
 }
