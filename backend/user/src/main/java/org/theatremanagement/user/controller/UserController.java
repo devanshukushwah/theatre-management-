@@ -2,10 +2,7 @@ package org.theatremanagement.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.theatremanagement.user.constant.ApplicationConstant;
 import org.theatremanagement.user.model.User;
 import org.theatremanagement.user.model.domain.CustomResponse;
@@ -29,6 +26,12 @@ public class UserController extends BaseController {
     ResponseEntity<CustomResponse<User>> getUser(@RequestParam(required = true) String id) {
         User user = userService.getUser(id);
         return getResponseEntityOK(user);
+    }
+
+    @PostMapping(ApplicationConstant.CREATE_USER)
+    ResponseEntity<CustomResponse<Boolean>> createUser(@RequestBody User user) {
+        boolean createResponse = userService.createUser(user);
+        return getResponseEntityOK(createResponse);
     }
 
 }

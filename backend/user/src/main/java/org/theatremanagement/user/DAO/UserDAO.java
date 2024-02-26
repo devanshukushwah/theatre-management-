@@ -9,4 +9,5 @@ public interface UserDAO {
 
     User getUser(String id);
 
+    boolean createUser(User user);
 }

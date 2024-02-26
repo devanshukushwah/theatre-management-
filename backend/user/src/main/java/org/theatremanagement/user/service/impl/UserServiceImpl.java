@@ -23,4 +23,9 @@ public class UserServiceImpl implements UserService {
     public User getUser(String id) {
         return userDAO.getUser(id);
     }
+
+    @Override
+    public boolean createUser(User user) {
+        return userDAO.createUser(user);
+    }
 }
