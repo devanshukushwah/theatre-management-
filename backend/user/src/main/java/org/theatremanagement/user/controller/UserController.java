@@ -17,21 +17,27 @@ public class UserController extends BaseController {
     @Autowired
     UserService userService;
 
-    @GetMapping(ApplicationConstant.GET_ALL_USER)
+    @GetMapping(ApplicationConstant.STRING_ALL)
     ResponseEntity<CustomResponse<List<User>>> getAllUser(){
         return getResponseEntityOK(userService.getAllUser());
     }
 
-    @GetMapping(ApplicationConstant.GET_USER)
-    ResponseEntity<CustomResponse<User>> getUser(@RequestParam(required = true) String id) {
+    @GetMapping
+    ResponseEntity<CustomResponse<User>> getUser(@RequestParam(required = true) Long id) {
         User user = userService.getUser(id);
         return getResponseEntityOK(user);
     }
 
-    @PostMapping(ApplicationConstant.CREATE_USER)
+    @PostMapping
     ResponseEntity<CustomResponse<Boolean>> createUser(@RequestBody User user) {
         boolean createResponse = userService.createUser(user);
         return getResponseEntityOK(createResponse);
+    }
+
+    @PutMapping
+    ResponseEntity<CustomResponse<User>> updateUser(@RequestBody User user) {
+        User updatedUser = userService.updateUser(user);
+        return getResponseEntityOK(updatedUser);
     }
 
 }

@@ -3,11 +3,9 @@ package org.theatremanagement.user.DAO.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.theatremanagement.user.DAO.UserDAO;
-import org.theatremanagement.user.model.Gender;
 import org.theatremanagement.user.model.User;
 import org.theatremanagement.user.repository.UserRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,31 +15,36 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     UserRepository userRepository;
 
-    private static List<User> users = Arrays.asList(User.builder()
-            .firstName("Devanshu")
-            .lastName("Kushwah")
-            .age(50)
-            .phoneNumber(1234567890)
-            .gender(Gender.MALE)
-            .id(21)
-            .build());
     @Override
     public List<User> getAllUser() {
         return this.userRepository.findAll();
     }
 
     @Override
-    public User getUser(String id) {
-//        Optional<User> first = this.users.stream().filter(f -> f.getId() == id).findFirst();
-
-//        return first.isPresent() ? first.get() : null;
-        return null;
+    public User getUser(Long id) {
+        Optional<User> byId = userRepository.findById(id);
+        return byId.isPresent() ? byId.get() : null;
     }
 
     @Override
     public boolean createUser(User user) {
-//        return this.users.add(user);
         User save = this.userRepository.save(user);
         return save.getId() > 0;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        Optional<User> existingUserOptional = userRepository.findById(user.getId());
+        if(existingUserOptional.isPresent()) {
+            User existingUser = existingUserOptional.get();
+            existingUser.setAge(user.getAge());
+            existingUser.setGender(user.getGender());
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setPhoneNumber(user.getPhoneNumber());
+            existingUser.setRole(user.getRole());
+            return userRepository.save(existingUser);
+        }
+        return null;
     }
 }
