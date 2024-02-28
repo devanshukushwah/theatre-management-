@@ -28,14 +28,22 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean createUser(User user) {
-        User save = this.userRepository.save(user);
-        return save.getId() > 0;
+        boolean exists = this.userRepository.existByEmailAddress(user.getEmailAddress());
+        if (!exists) {
+            User onlyAttributeUser = User.builder()
+                    .emailAddress(user.getEmailAddress())
+                    .password(user.getPassword())
+                    .build();
+            User save = this.userRepository.save(onlyAttributeUser);
+            return save.getId() > 0L;
+        }
+        return false;
     }
 
     @Override
     public User updateUser(User user) {
         Optional<User> existingUserOptional = userRepository.findById(user.getId());
-        if(existingUserOptional.isPresent()) {
+        if (existingUserOptional.isPresent()) {
             User existingUser = existingUserOptional.get();
             existingUser.setAge(user.getAge());
             existingUser.setGender(user.getGender());

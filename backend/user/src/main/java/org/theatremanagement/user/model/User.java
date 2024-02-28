@@ -23,4 +23,6 @@ public class User {
     private Gender gender;
     private long phoneNumber;
     private String role;
+    private String emailAddress;
+    private String password;
 }
