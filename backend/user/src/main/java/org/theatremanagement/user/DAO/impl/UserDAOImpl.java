@@ -21,38 +21,18 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getUser(Long id) {
+    public User getUserById(Long id) {
         Optional<User> byId = userRepository.findById(id);
         return byId.isPresent() ? byId.get() : null;
     }
 
     @Override
-    public boolean createUser(User user) {
-        boolean exists = this.userRepository.existByEmailAddress(user.getEmailAddress());
-        if (!exists) {
-            User onlyAttributeUser = User.builder()
-                    .emailAddress(user.getEmailAddress())
-                    .password(user.getPassword())
-                    .build();
-            User save = this.userRepository.save(onlyAttributeUser);
-            return save.getId() > 0L;
-        }
-        return false;
+    public User save(User user) {
+        return this.userRepository.save(user);
     }
 
     @Override
-    public User updateUser(User user) {
-        Optional<User> existingUserOptional = userRepository.findById(user.getId());
-        if (existingUserOptional.isPresent()) {
-            User existingUser = existingUserOptional.get();
-            existingUser.setAge(user.getAge());
-            existingUser.setGender(user.getGender());
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setPhoneNumber(user.getPhoneNumber());
-            existingUser.setRole(user.getRole());
-            return userRepository.save(existingUser);
-        }
-        return null;
+    public User findByEmailAddress(String email) {
+        return this.userRepository.findByEmailAddress(email);
     }
 }

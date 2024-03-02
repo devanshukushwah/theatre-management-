@@ -7,9 +7,9 @@ import java.util.List;
 public interface UserDAO {
     public List<User> getAllUser();
 
-    User getUser(Long id);
+    User getUserById(Long id);
 
-    boolean createUser(User user);
+    public User save(User user);
 
-    public User updateUser(User user);
+    public User findByEmailAddress(String email);
 }
