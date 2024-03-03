@@ -15,3 +15,7 @@
 log/
 target/
 /backend/user/.idea
+
+# jar
+**/*.jar
+
