@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.theatremanagement.user.constant.ApplicationConstant;
+import org.theatremanagement.user.exception.UserAlreadyExistException;
+import org.theatremanagement.user.exception.UserNotFoundException;
 import org.theatremanagement.user.model.User;
 import org.theatremanagement.user.model.domain.CustomResponse;
 import org.theatremanagement.user.service.UserService;
@@ -18,24 +20,24 @@ public class UserController extends BaseController {
     UserService userService;
 
     @GetMapping(ApplicationConstant.STRING_ALL)
-    ResponseEntity<CustomResponse<List<User>>> getAllUser(){
+    ResponseEntity<CustomResponse> getAllUser(){
         return getResponseEntityOK(userService.getAllUser());
     }
 
     @GetMapping
-    ResponseEntity<CustomResponse<User>> getUser(@RequestParam(required = true) Long id) {
+    ResponseEntity<CustomResponse> getUser(@RequestParam(required = true) Long id) {
         User user = userService.getUser(id);
         return getResponseEntityOK(user);
     }
 
     @PostMapping
-    ResponseEntity<CustomResponse<Boolean>> createUser(@RequestBody User user) {
+    ResponseEntity<CustomResponse> createUser(@RequestBody User user) throws UserAlreadyExistException {
         boolean createResponse = userService.createUser(user);
         return getResponseEntityOK(createResponse);
     }
 
     @PutMapping
-    ResponseEntity<CustomResponse<User>> updateUser(@RequestBody User user) {
+    ResponseEntity<CustomResponse> updateUser(@RequestBody User user) throws UserNotFoundException {
         User updatedUser = userService.updateUser(user);
         return getResponseEntityOK(updatedUser);
     }

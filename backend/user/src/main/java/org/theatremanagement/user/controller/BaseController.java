@@ -4,11 +4,11 @@ import org.springframework.http.ResponseEntity;
 import org.theatremanagement.user.model.domain.CustomResponse;
 
 public class BaseController {
-    public ResponseEntity getResponseEntityOK(Object data) {
-        CustomResponse response = CustomResponse.builder()
-                .success(true)
-                .data(data)
-                .build();
+    public <T> ResponseEntity<CustomResponse> getResponseEntityOK(T data) {
+        CustomResponse<T> response = new CustomResponse();
+        response.setSuccess(true);
+        response.setData(data);
+
         return ResponseEntity.ok(response);
     }
 }
