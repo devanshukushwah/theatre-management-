@@ -1,6 +1,7 @@
 package org.theatremanagement.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.theatremanagement.user.DAO.UserDAO;
 import org.theatremanagement.user.exception.UserAlreadyExistException;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUser() {
@@ -33,6 +37,9 @@ public class UserServiceImpl implements UserService {
         if (userExist != null) {
             throw new UserAlreadyExistException();
         }
+
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User onlyAttributeUser = User.builder()
                 .emailAddress(user.getEmailAddress())
@@ -56,4 +63,18 @@ public class UserServiceImpl implements UserService {
         existingUser.setRole(user.getRole());
         return userDAO.save(existingUser);
     }
+
+    @Override
+    public Boolean validateEmailAndPassword(String emailAddress, String password) throws UserNotFoundException {
+        User userExist = userDAO.findByEmailAddress(emailAddress);
+
+        if (userExist == null) {
+            throw new UserNotFoundException();
+        }
+
+        String encodedPassword = passwordEncoder.encode(password);
+
+        return userExist.getPassword().equals(encodedPassword);
+    }
+
 }

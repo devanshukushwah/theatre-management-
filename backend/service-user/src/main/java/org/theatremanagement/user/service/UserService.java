@@ -14,5 +14,7 @@ public interface UserService {
     public boolean createUser(User user) throws UserAlreadyExistException;
 
     public User updateUser(User user) throws UserNotFoundException;
+
+    Boolean validateEmailAndPassword(String emailAddress, String password) throws UserNotFoundException;
 }
 

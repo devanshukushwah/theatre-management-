@@ -13,30 +13,31 @@ import org.theatremanagement.user.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = ApplicationConstant.MAPPING_USER)
+@RequestMapping(value = ApplicationConstant.MAPPING_REST_V1_USER)
 public class UserController extends BaseController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping(ApplicationConstant.STRING_ALL)
+    @GetMapping("get-all-user")
     ResponseEntity<CustomResponse> getAllUser(){
         return getResponseEntityOK(userService.getAllUser());
     }
 
-    @GetMapping
+    @GetMapping("get-user")
     ResponseEntity<CustomResponse> getUser(@RequestParam(required = true) Long id) {
         User user = userService.getUser(id);
         return getResponseEntityOK(user);
     }
 
-    @PostMapping
+    /* Moved to Auth Controller
+    @PostMapping("create-user")
     ResponseEntity<CustomResponse> createUser(@RequestBody User user) throws UserAlreadyExistException {
         boolean createResponse = userService.createUser(user);
         return getResponseEntityOK(createResponse);
-    }
+    } */
 
-    @PutMapping
+    @PutMapping("update-user")
     ResponseEntity<CustomResponse> updateUser(@RequestBody User user) throws UserNotFoundException {
         User updatedUser = userService.updateUser(user);
         return getResponseEntityOK(updatedUser);
