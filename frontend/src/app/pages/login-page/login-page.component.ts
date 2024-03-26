@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CredentialsService } from 'src/app/services/credentials.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,15 +10,27 @@ import { CredentialsService } from 'src/app/services/credentials.service';
 export class LoginPageComponent implements OnInit {
   email!: string;
   password!: string;
+  isDisabled: boolean = false;
 
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(
+    private credentialsService: CredentialsService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {}
 
   handleLogin() {
+    this.isDisabled = true;
     const data = { email: this.email, password: this.password };
-    this.credentialsService.generateToken(data).subscribe((res) => {
-      console.log(res);
-    });
+    this.credentialsService.generateToken(data).subscribe(
+      (res) => {
+        this.localStorageService.setItem('userDetails', { token: res });
+        this.isDisabled = false;
+      },
+      (err) => {
+        console.log(err);
+        this.isDisabled = false;
+      }
+    );
   }
 }

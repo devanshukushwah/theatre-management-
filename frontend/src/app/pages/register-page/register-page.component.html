@@ -4,7 +4,7 @@
 >
   <div class="card" style="min-width: 350px">
     <div class="card-body">
-      <h5 class="card-title text-center">Create User</h5>
+      <h5 class="card-title text-center">Create User Page</h5>
       <form (ngSubmit)="handleCreateUser()">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
@@ -39,7 +39,22 @@
             placeholder="Confirm Password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <!-- <button type="submit" class="btn btn-primary">Create</button> -->
+        <button
+          class="btn btn-sm btn-primary"
+          type="submit"
+          [disabled]="isDisabled"
+        >
+          <span *ngIf="!isDisabled">Submit</span>
+          <span *ngIf="isDisabled">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Loading...
+          </span>
+        </button>
       </form>
       <a routerLink="/login">Login</a>
     </div>

@@ -4,7 +4,7 @@
 >
   <div class="card" style="min-width: 350px">
     <div class="card-body">
-      <h5 class="card-title text-center">Login</h5>
+      <h5 class="card-title text-center">Login Page</h5>
       <form (ngSubmit)="handleLogin()">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
@@ -28,7 +28,22 @@
             placeholder="Password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
+        <button
+          class="btn btn-sm btn-primary"
+          type="submit"
+          [disabled]="isDisabled"
+        >
+          <span *ngIf="!isDisabled">Login</span>
+          <span *ngIf="isDisabled">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Loading...
+          </span>
+        </button>
       </form>
       <a routerLink="/signup">Create Account</a>
     </div>

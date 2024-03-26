@@ -20,6 +20,8 @@ export class CredentialsService {
   generateToken(data: { email: string; password: string }): Observable<any> {
     const apiData = { emailAddress: data.email, password: data.password };
 
-    return this.http.post(this.httpUrlsService.generateToken(), apiData);
+    return this.http.post(this.httpUrlsService.generateToken(), apiData, {
+      responseType: 'text',
+    });
   }
 }
