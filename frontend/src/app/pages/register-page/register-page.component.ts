@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpUrlsService } from 'src/app/core/http-urls.service';
+import { CredentialsService } from 'src/app/services/credentials.service';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  styleUrls: ['./register-page.component.css'],
 })
 export class RegisterPageComponent implements OnInit {
+  email!: string;
+  password!: string;
+  confirmPassword!: string;
 
-  constructor() { }
+  constructor(private credentialsService: CredentialsService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  handleCreateUser() {
+    if (this.password !== this.confirmPassword) {
+      alert('password not matching');
+      return;
+    }
+    const data = { email: this.email, password: this.password };
+    this.credentialsService.createUser(data).subscribe((res) => {
+      console.log(res);
+    });
   }
-
 }
