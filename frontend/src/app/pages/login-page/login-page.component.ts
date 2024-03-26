@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserDetails } from 'src/app/common.interface/UserDetails';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,10 +17,15 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private credentialsService: CredentialsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private routerService: RouterService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.credentialsService.userTokenExist()) {
+      this.routerService.navigateToHome();
+    }
+  }
 
   handleLogin() {
     this.isDisabled = true;
@@ -26,6 +34,7 @@ export class LoginPageComponent implements OnInit {
       (res) => {
         this.localStorageService.setItem('userDetails', { token: res });
         this.isDisabled = false;
+        this.routerService.navigateToHome();
       },
       (err) => {
         console.log(err);

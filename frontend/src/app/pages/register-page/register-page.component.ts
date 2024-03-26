@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserDetails } from 'src/app/common.interface/UserDetails';
 import { HttpUrlsService } from 'src/app/core/http-urls.service';
 import { CredentialsService } from 'src/app/services/credentials.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-register-page',
@@ -14,9 +18,17 @@ export class RegisterPageComponent implements OnInit {
   confirmPassword!: string;
   isDisabled: boolean = false;
 
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(
+    private credentialsService: CredentialsService,
+    private routerService: RouterService,
+    private localStorageService: LocalStorageService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.credentialsService.userTokenExist()) {
+      this.routerService.navigateToHome();
+    }
+  }
 
   handleCreateUser() {
     this.isDisabled = true;
@@ -27,8 +39,8 @@ export class RegisterPageComponent implements OnInit {
     const data = { email: this.email, password: this.password };
     this.credentialsService.createUser(data).subscribe(
       (res) => {
-        console.log(res);
         this.isDisabled = false;
+        this.routerService.navigateToHome();
       },
       (err) => {
         console.log(err);
