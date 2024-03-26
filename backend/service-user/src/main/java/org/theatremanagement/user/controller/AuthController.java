@@ -19,7 +19,7 @@ public class AuthController {
     @Autowired
     JwtService jwtService;
 
-    @GetMapping("/generate-token")
+    @PostMapping("/generate-token")
     public String getToken(@RequestBody User user) {
         return jwtService.generateToken(user);
     }
