@@ -28,9 +28,22 @@ export class CredentialsService {
     });
   }
 
-  userTokenExist(): boolean {
-    const userDetails: UserDetails =
-      this.localStorageService.getItem('userDetails');
-    return userDetails ? true : false;
+  userIsValid(): boolean {
+    const userDetails: UserDetails = this.getUserDetails();
+
+    return userDetails?.token ? true : false;
+  }
+
+  getUserDetails(): UserDetails {
+    return this.localStorageService.getItem('userDetails');
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const userDetails: UserDetails = this.getUserDetails();
+
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userDetails?.token || 'token-not-found'}`,
+    });
   }
 }

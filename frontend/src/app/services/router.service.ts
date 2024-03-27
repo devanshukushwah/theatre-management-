@@ -10,4 +10,8 @@ export class RouterService {
   navigateToHome(): void {
     this.router.navigate(['/home']);
   }
+
+  navigateToLoginPage(): void {
+    this.router.navigate(['/login']);
+  }
 }

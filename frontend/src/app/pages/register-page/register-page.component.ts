@@ -25,7 +25,7 @@ export class RegisterPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.credentialsService.userTokenExist()) {
+    if (this.credentialsService.userIsValid()) {
       this.routerService.navigateToHome();
     }
   }
