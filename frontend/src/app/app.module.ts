@@ -8,9 +8,11 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpUrlsService } from './core/http-urls.service';
+import { HeaderComponent } from './components/header/header.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HeaderComponent, HomePageComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HttpUrlsService],
   bootstrap: [AppComponent],

@@ -38,6 +38,11 @@ export class CredentialsService {
     return this.localStorageService.getItem('userDetails');
   }
 
+  logOff(): boolean {
+    this.localStorageService.removeItem('userDetails');
+    return true;
+  }
+
   getAuthHeaders(): HttpHeaders {
     const userDetails: UserDetails = this.getUserDetails();
 
