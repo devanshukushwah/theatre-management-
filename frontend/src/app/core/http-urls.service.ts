@@ -16,4 +16,12 @@ export class HttpUrlsService {
   generateToken(): string {
     return `${this.baseUrl}/${this.userMicroService}/rest/v1/auth/generate-token`;
   }
+
+  updateUserProfile(): string {
+    return `${this.baseUrl}/${this.userMicroService}/rest/v1/user/user`;
+  }
+
+  getUserProfile(): string {
+    return `${this.baseUrl}/${this.userMicroService}/rest/v1/user/user`;
+  }
 }

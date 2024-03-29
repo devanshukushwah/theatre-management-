@@ -1,0 +1,11 @@
+<span
+  ><b>{{ title }}:</b>
+  <ng-container
+    *ngIf="value != null && value != undefined && value != ''; else ShowNull"
+  >
+    {{ value }}
+  </ng-container>
+  <ng-template #ShowNull>
+    <i> null</i>
+  </ng-template>
+</span>

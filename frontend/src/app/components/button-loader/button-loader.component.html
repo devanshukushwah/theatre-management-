@@ -1,0 +1,11 @@
+<button class="btn btn-sm btn-primary" [type]="type" [disabled]="disabled">
+  <span *ngIf="!disabled">{{ label }}</span>
+  <span *ngIf="disabled">
+    <span
+      class="spinner-border spinner-border-sm"
+      role="status"
+      aria-hidden="true"
+    ></span>
+    Loading...
+  </span>
+</button>

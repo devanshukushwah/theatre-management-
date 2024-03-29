@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,12 @@ const routes: Routes = [
     path: 'home',
     canActivate: [AuthGuard],
   },
+  {
+    component: ProfilePageComponent,
+    path: 'profile',
+    canActivate: [AuthGuard],
+  },
+
   {
     path: '',
     redirectTo: 'home',

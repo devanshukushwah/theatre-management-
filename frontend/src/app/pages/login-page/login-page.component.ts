@@ -32,7 +32,10 @@ export class LoginPageComponent implements OnInit {
     const data = { email: this.email, password: this.password };
     this.credentialsService.generateToken(data).subscribe(
       (res) => {
-        this.localStorageService.setItem('userDetails', { token: res });
+        this.localStorageService.setItem('userDetails', {
+          token: res,
+          emailAddress: this.email,
+        });
         this.isDisabled = false;
         this.routerService.navigateToHome();
       },

@@ -10,9 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpUrlsService } from './core/http-urls.service';
 import { HeaderComponent } from './components/header/header.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfileFieldComponent } from './components/profile-field/profile-field.component';
+import { ButtonLoaderComponent } from './components/button-loader/button-loader.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HeaderComponent, HomePageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, HeaderComponent, HomePageComponent, ProfilePageComponent, ProfileFieldComponent, ButtonLoaderComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HttpUrlsService],
   bootstrap: [AppComponent],
