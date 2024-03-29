@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(String emailAddress) {
+        return userDAO.findByEmailAddress(emailAddress);
+    }
+
+    @Override
     public boolean createUser(User user) throws UserAlreadyExistException {
         User userExist = userDAO.findByEmailAddress(user.getEmailAddress());
 
@@ -51,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) throws UserNotFoundException {
-        User existingUser = userDAO.getUserById(user.getId());
+        User existingUser = userDAO.findByEmailAddress(user.getEmailAddress());
         if (existingUser == null) {
             throw new UserNotFoundException();
         }
@@ -76,5 +81,11 @@ public class UserServiceImpl implements UserService {
 
         return userExist.getPassword().equals(encodedPassword);
     }
+
+    @Override
+    public User getUserByEmailAddress(String emailAddress) {
+        return userDAO.findByEmailAddress(emailAddress);
+    }
+
 
 }

@@ -11,10 +11,14 @@ public interface UserService {
 
     public User getUser(Long id);
 
+    public User getUser(String emailAddress);
+
     public boolean createUser(User user) throws UserAlreadyExistException;
 
     public User updateUser(User user) throws UserNotFoundException;
 
     Boolean validateEmailAndPassword(String emailAddress, String password) throws UserNotFoundException;
+
+    User getUserByEmailAddress(String emailAddress);
 }
 

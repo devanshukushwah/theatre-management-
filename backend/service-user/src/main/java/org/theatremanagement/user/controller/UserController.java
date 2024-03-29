@@ -19,14 +19,21 @@ public class UserController extends BaseController {
     @Autowired
     UserService userService;
 
-    @GetMapping("get-all-user")
+    @GetMapping("users")
     ResponseEntity<CustomResponse> getAllUser(){
         return getResponseEntityOK(userService.getAllUser());
     }
 
-    @GetMapping("get-user")
-    ResponseEntity<CustomResponse> getUser(@RequestParam(required = true) Long id) {
-        User user = userService.getUser(id);
+    @GetMapping("user")
+    ResponseEntity<CustomResponse> getUser(@RequestParam(required = false) Long id,
+                                           @RequestParam(required = false) String emailAddress) {
+        User user = null;
+        if(emailAddress != null) {
+            user = userService.getUserByEmailAddress(emailAddress);
+        } else if (id != null) {
+            user = userService.getUser(id);
+        }
+
         return getResponseEntityOK(user);
     }
 
@@ -37,7 +44,7 @@ public class UserController extends BaseController {
         return getResponseEntityOK(createResponse);
     } */
 
-    @PutMapping("update-user")
+    @PutMapping("user")
     ResponseEntity<CustomResponse> updateUser(@RequestBody User user) throws UserNotFoundException {
         User updatedUser = userService.updateUser(user);
         return getResponseEntityOK(updatedUser);
