@@ -43,12 +43,11 @@ export class CredentialsService {
     return true;
   }
 
-  getAuthHeaders(): HttpHeaders {
-    const userDetails: UserDetails = this.getUserDetails();
-
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${userDetails?.token || 'token-not-found'}`,
-    });
+  /** Method to get current User token
+   *
+   * @returns User Token
+   */
+  getUserToken(): string {
+    return this.getUserDetails()?.token;
   }
 }

@@ -16,13 +16,7 @@ export class ProfileService {
   ) {}
 
   updateProfile(userProfile: UserProfile): Observable<any> {
-    return this.http.put(
-      this.httpUrlsService.updateUserProfile(),
-      userProfile,
-      {
-        headers: this.credService.getAuthHeaders(),
-      }
-    );
+    return this.http.put(this.httpUrlsService.updateUserProfile(), userProfile);
   }
 
   getProfileByEmailAddress(emailAddress: string): Observable<any> {
@@ -32,7 +26,6 @@ export class ProfileService {
     );
 
     return this.http.get(this.httpUrlsService.getUserProfile(), {
-      headers: this.credService.getAuthHeaders(),
       params: params,
     });
   }
