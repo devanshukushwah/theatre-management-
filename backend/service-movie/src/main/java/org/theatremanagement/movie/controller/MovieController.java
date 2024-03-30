@@ -17,7 +17,7 @@ public class MovieController extends BaseController {
     @Autowired
     MovieService movieService;
 
-    @GetMapping(ApplicationConstant.STRING_ALL)
+    @GetMapping("movies")
     ResponseEntity<CustomResponse<List<Movie>>> getAllMovie(){
         return getResponseEntityOK(movieService.getAllMovie());
     }
@@ -28,13 +28,13 @@ public class MovieController extends BaseController {
         return getResponseEntityOK(Movie);
     }
 
-    @PostMapping
-    ResponseEntity<CustomResponse<Boolean>> createMovie(@RequestBody Movie Movie) {
-        boolean createResponse = movieService.createMovie(Movie);
+    @PostMapping("movie")
+    ResponseEntity<CustomResponse<Movie>> createMovie(@RequestBody Movie Movie) {
+        Movie createResponse = movieService.createMovie(Movie);
         return getResponseEntityOK(createResponse);
     }
 
-    @PutMapping
+    @PutMapping("movie")
     ResponseEntity<CustomResponse<Movie>> updateMovie(@RequestBody Movie movie) {
         Movie updatedMovie = movieService.updateMovie(movie);
         return getResponseEntityOK(updatedMovie);

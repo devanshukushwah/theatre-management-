@@ -9,7 +9,7 @@ public interface MovieService {
 
     public Movie getMovie(Long id);
 
-    public boolean createMovie(Movie Movie);
+    public Movie createMovie(Movie Movie);
 
     public Movie updateMovie(Movie Movie);
 }

@@ -25,7 +25,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public boolean createMovie(Movie movie) {
+    public Movie createMovie(Movie movie) {
         List<Movie> movieByName = movieDAO.findMovieByName(movie.getName());
         if(movieByName.isEmpty()) {
             Movie onlyAttributeMovie = Movie.builder()
@@ -34,10 +34,9 @@ public class MovieServiceImpl implements MovieService {
                     .actors(movie.getActors())
                     .director(movie.getDirector())
                     .build();
-            Movie saved = this.movieDAO.save(onlyAttributeMovie);
-            return saved.getId() > 0L;
+            return this.movieDAO.save(onlyAttributeMovie);
         }
-        return false;
+        return null;
     }
 
     @Override
