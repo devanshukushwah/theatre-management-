@@ -1,0 +1,29 @@
+<div class="container">
+  <h2 class="my-4">Movie Table</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Duration (minutes)</th>
+          <th>Actors</th>
+          <th>Director</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of movies">
+          <!-- <td>{{ movie.id }}</td> -->
+          <td>{{ movie.name }}</td>
+          <td>{{ movie.duration }}</td>
+          <td>
+            <ul class="list-unstyled">
+              <li *ngFor="let actor of movie.actors">{{ actor }}</li>
+            </ul>
+          </td>
+          <td>{{ movie.director }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Add Movie</h2>
+  <form (ngSubmit)="handleAddMovie()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter movie name"
+        name="name"
+        [(ngModel)]="movie.name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="duration">Duration (in minutes):</label>
+      <input
+        type="number"
+        class="form-control"
+        id="duration"
+        placeholder="Enter duration"
+        name="duration"
+        [(ngModel)]="movie.duration"
+      />
+    </div>
+    <div class="form-group">
+      <label for="actors">Actors:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="actors"
+        placeholder="Enter actors (separated by commas)"
+        name="actors"
+        [(ngModel)]="actors"
+      />
+    </div>
+    <div class="form-group">
+      <label for="director">Director:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="director"
+        placeholder="Enter director"
+        name="director"
+        [(ngModel)]="movie.director"
+      />
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary mt-2">Submit</button>
+  </form>
+</div>

@@ -14,6 +14,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { ProfileFieldComponent } from './components/profile-field/profile-field.component';
 import { ButtonLoaderComponent } from './components/button-loader/button-loader.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.component';
+import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ProfilePageComponent,
     ProfileFieldComponent,
     ButtonLoaderComponent,
+    AddMoviePageComponent,
+    MoviePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

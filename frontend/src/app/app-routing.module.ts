@@ -6,6 +6,8 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.component';
+import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 
 const routes: Routes = [
   {
@@ -26,7 +28,16 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard],
   },
-
+  {
+    component: MoviePageComponent,
+    path: 'movie',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: AddMoviePageComponent,
+    path: 'movie/add',
+    canActivate: [AuthGuard],
+  },
   {
     path: '',
     redirectTo: 'home',
