@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDetails } from 'src/app/common.interface/UserDetails';
+import { UserProfile } from 'src/app/common.interface/UserProfile';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { RouterService } from 'src/app/services/router.service';
 
 @Component({
@@ -18,7 +20,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private credentialsService: CredentialsService,
     private localStorageService: LocalStorageService,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -30,14 +33,31 @@ export class LoginPageComponent implements OnInit {
   handleLogin() {
     this.isDisabled = true;
     const data = { email: this.email, password: this.password };
+
+    // first fetch token
     this.credentialsService.generateToken(data).subscribe(
       (res) => {
-        this.localStorageService.setItem('userDetails', {
+        let userDetails: UserDetails = {
           token: res,
           emailAddress: this.email,
-        });
+          userProfile: null,
+        };
+        this.localStorageService.setItem('userDetails', userDetails);
+
+        if (res) {
+          // second get userProfile
+          this.profileService
+            .getProfileByEmailAddress(this.email)
+            .subscribe((res) => {
+              const userProfile: UserProfile = res?.data;
+              userDetails = { ...userDetails, userProfile };
+              this.localStorageService.setItem('userDetails', userDetails);
+            });
+
+          this.routerService.navigateToHome();
+        }
+
         this.isDisabled = false;
-        this.routerService.navigateToHome();
       },
       (err) => {
         console.log(err);

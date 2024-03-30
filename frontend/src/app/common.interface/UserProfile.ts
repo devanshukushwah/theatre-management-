@@ -4,4 +4,5 @@ export interface UserProfile {
   phoneNumber: string | null | undefined;
   age: string | null | undefined;
   gender: string | null | undefined;
+  role: string | null | undefined;
 }
