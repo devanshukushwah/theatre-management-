@@ -50,4 +50,17 @@ export class CredentialsService {
   getUserToken(): string {
     return this.getUserDetails()?.token;
   }
+
+  /** Method to get current User role
+   *
+   * @returns User Role
+   */
+  getUserRole(): string | null | undefined {
+    const userDetails: UserDetails = this.getUserDetails();
+    return userDetails?.userProfile?.role || null;
+  }
+
+  adminControl(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
 }
