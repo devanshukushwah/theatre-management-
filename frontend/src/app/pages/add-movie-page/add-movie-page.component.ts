@@ -9,7 +9,6 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class AddMoviePageComponent implements OnInit {
   movie!: Movie;
-  actors!: string;
 
   constructor(private movieService: MovieService) {}
 
@@ -22,16 +21,13 @@ export class AddMoviePageComponent implements OnInit {
       id: null, // Initialize with appropriate default values
       name: null,
       duration: null,
-      actors: [],
+      actors: null,
       director: null,
     };
-    this.actors = '';
   }
 
   handleAddMovie(): void {
-    this.movie.actors = this.actors.split(',');
     this.movieService.addMovie(this.movie).subscribe((res) => {
-      // console.log(res);
       this.clearMovieValues();
     });
   }

@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="my-4">
     Movie Table
-    <ng-container *ngIf="adminControl()">
+    <ng-container *ngIf="credService.adminControl()">
       <a routerLink="./add" class="btn btn-sm btn-secondary">Add Movie</a>
     </ng-container>
   </h2>
@@ -14,7 +14,7 @@
           <th>Duration (minutes)</th>
           <th>Actors</th>
           <th>Director</th>
-          <ng-container *ngIf="adminControl()">
+          <ng-container *ngIf="credService.adminControl()">
             <th>Operation</th>
           </ng-container>
         </tr>
@@ -25,21 +25,117 @@
           <td>{{ movie.name }}</td>
           <td>{{ movie.duration }}</td>
           <td>
-            <ul class="list-unstyled">
-              <li *ngFor="let actor of movie.actors">{{ actor }}</li>
-            </ul>
+            <!-- <ul class="list-unstyled">
+              <li *ngFor="let actor of movie.actors?.split(',')"> -->
+            {{ movie.actors }}
+            <!-- </li>
+            </ul> -->
           </td>
           <td>{{ movie.director }}</td>
-          <ng-container *ngIf="adminControl()">
+          <ng-container *ngIf="credService.adminControl()">
             <td>
               <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-primary">Edit</button>
-                <button class="btn btn-sm btn-danger ml-2">Delete</button>
+                <button
+                  class="btn btn-sm btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editMovieModal"
+                  (click)="handleEditMovieButton(movie)"
+                >
+                  Edit
+                </button>
+                <!-- <button class="btn btn-sm btn-danger ml-2">Delete</button> -->
               </div>
             </td>
           </ng-container>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="editMovieModal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Movie</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Enter movie name"
+              name="name"
+              [(ngModel)]="editMovieModalData.name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration (in minutes):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="duration"
+              placeholder="Enter duration"
+              name="duration"
+              [(ngModel)]="editMovieModalData.duration"
+            />
+          </div>
+          <div class="form-group">
+            <label for="actors">Actors:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="actors"
+              placeholder="Enter actors (separated by commas)"
+              name="actors"
+              [(ngModel)]="editMovieModalData.actors"
+            />
+          </div>
+          <div class="form-group">
+            <label for="director">Director:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="director"
+              placeholder="Enter director"
+              name="director"
+              [(ngModel)]="editMovieModalData.director"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            (click)="handleUpdateMovie()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

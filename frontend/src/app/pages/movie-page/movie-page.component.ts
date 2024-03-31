@@ -10,21 +10,41 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MoviePageComponent implements OnInit {
   movies!: Movie[];
+  editMovieModalData: Movie = {
+    id: null, // Initialize with appropriate default values
+    name: null,
+    duration: null,
+    actors: null,
+    director: null,
+  };
 
   constructor(
     private movieService: MovieService,
-    private credService: CredentialsService
+    public credService: CredentialsService
   ) {}
 
   ngOnInit(): void {
     this.movies = [];
+    this.getAllMovie();
+  }
+
+  getAllMovie(): void {
     this.movieService.getAllMovies().subscribe((res) => {
       console.log(res);
       this.movies = res?.data || [];
     });
   }
 
-  adminControl(): boolean {
-    return this.credService.adminControl();
+  handleEditMovieButton(movie: Movie) {
+    this.editMovieModalData = movie;
+  }
+
+  handleUpdateMovie() {
+    this.movieService.updateMovie(this.editMovieModalData).subscribe((res) => {
+      if (res?.data) {
+        this.editMovieModalData = res.data;
+        this.getAllMovie();
+      }
+    });
   }
 }

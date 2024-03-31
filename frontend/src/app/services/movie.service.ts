@@ -13,8 +13,26 @@ export class MovieService {
     private httpUrlsService: HttpUrlsService
   ) {}
 
+  reformatMovie(movie: Movie): any {
+    // actors is accepted as list in BE
+    const sendData = {
+      ...movie,
+      actors: movie.actors?.split(','),
+    };
+
+    return sendData;
+  }
+
   addMovie(data: Movie): Observable<any> {
-    return this.http.post(this.httpUrlsService.addMovie(), data);
+    const sendData = this.reformatMovie(data);
+
+    return this.http.post(this.httpUrlsService.addMovie(), sendData);
+  }
+
+  updateMovie(data: Movie): Observable<any> {
+    const sendData = this.reformatMovie(data);
+
+    return this.http.put(this.httpUrlsService.updateMovie(), sendData);
   }
 
   getAllMovies(): Observable<any> {
