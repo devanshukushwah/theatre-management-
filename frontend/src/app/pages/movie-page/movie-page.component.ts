@@ -47,4 +47,14 @@ export class MoviePageComponent implements OnInit {
       }
     });
   }
+
+  handleDeleteMovie(id: number | null | undefined) {
+    if (id) {
+      this.movieService.deleteMovieById(id).subscribe((res) => {
+        if (res?.success) {
+          this.getAllMovie();
+        }
+      });
+    }
+  }
 }

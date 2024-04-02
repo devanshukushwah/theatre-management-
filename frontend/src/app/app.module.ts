@@ -16,6 +16,7 @@ import { ButtonLoaderComponent } from './components/button-loader/button-loader.
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.component';
 import { MoviePageComponent } from './pages/movie-page/movie-page.component';
+import { MovieComponent } from './components/forms/movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MoviePageComponent } from './pages/movie-page/movie-page.component';
     ButtonLoaderComponent,
     AddMoviePageComponent,
     MoviePageComponent,
+    MovieComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

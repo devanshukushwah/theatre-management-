@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpUrlsService } from '../core/http-urls.service';
@@ -37,5 +37,10 @@ export class MovieService {
 
   getAllMovies(): Observable<any> {
     return this.http.get(this.httpUrlsService.getAllMovie());
+  }
+
+  deleteMovieById(id: number): Observable<any> {
+    const params: HttpParams = new HttpParams().set('id', id);
+    return this.http.delete(this.httpUrlsService.deleteMovie(), { params });
   }
 }

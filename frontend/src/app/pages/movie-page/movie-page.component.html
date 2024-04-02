@@ -43,7 +43,12 @@
                 >
                   Edit
                 </button>
-                <!-- <button class="btn btn-sm btn-danger ml-2">Delete</button> -->
+                <button
+                  class="btn btn-sm btn-danger ml-2"
+                  (click)="handleDeleteMovie(movie.id)"
+                >
+                  Delete
+                </button>
               </div>
             </td>
           </ng-container>

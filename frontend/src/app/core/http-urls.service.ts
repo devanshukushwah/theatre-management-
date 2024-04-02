@@ -37,4 +37,8 @@ export class HttpUrlsService {
   updateMovie(): string {
     return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
   }
+
+  deleteMovie(): string {
+    return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
+  }
 }
