@@ -25,7 +25,7 @@ public class JwtServiceImpl implements JwtService {
 
     private static final String SECRET = "7501d72fe1051076f9d3701dd337a77f9f72412a11b6c0898099e3c274989d82";
 
-    private static final long expire = 1000 * 60 * 30;
+    private static final long expire = 1000 * 60 * 60 * 24;
 
     @Autowired
     AuthenticationManager authenticationManager;

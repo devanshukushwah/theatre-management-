@@ -12,4 +12,6 @@ public interface MovieDAO {
     public Movie save(Movie movie);
 
     public List<Movie> findMovieByName(String name);
+
+    public void deleteMovieById(long id);
 }

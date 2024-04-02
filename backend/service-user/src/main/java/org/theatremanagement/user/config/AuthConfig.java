@@ -35,9 +35,10 @@ public class AuthConfig {
         return http
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/rest/v1/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/rest/v1/auth/create-user").permitAll()
-                        .anyRequest().authenticated()
+//                        .requestMatchers("/rest/v1/auth/**").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/rest/v1/auth/create-user").permitAll()
+//                        .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

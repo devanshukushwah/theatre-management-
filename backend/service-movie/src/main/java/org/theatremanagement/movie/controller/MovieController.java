@@ -40,4 +40,10 @@ public class MovieController extends BaseController {
         return getResponseEntityOK(updatedMovie);
     }
 
+    @DeleteMapping("movie")
+    ResponseEntity<CustomResponse<Boolean>> updateMovie(@RequestParam long id) {
+        boolean deleteMovieById = movieService.deleteMovieById(id);
+        return getResponseEntityOK(deleteMovieById);
+    }
+
 }

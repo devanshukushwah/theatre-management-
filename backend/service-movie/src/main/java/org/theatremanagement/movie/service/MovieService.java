@@ -12,5 +12,7 @@ public interface MovieService {
     public Movie createMovie(Movie Movie);
 
     public Movie updateMovie(Movie Movie);
+
+    public boolean deleteMovieById(long id);
 }
 

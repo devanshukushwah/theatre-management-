@@ -51,4 +51,13 @@ public class MovieServiceImpl implements MovieService {
         }
         return null;
     }
+
+    @Override
+    public boolean deleteMovieById(long id) {
+        this.movieDAO.deleteMovieById(id);
+
+        Movie movieById = this.movieDAO.getMovieById(id);
+
+        return movieById == null;
+    }
 }
