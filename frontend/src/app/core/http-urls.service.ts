@@ -7,6 +7,7 @@ export class HttpUrlsService {
   baseUrl: string = 'http://localhost:5000';
   userMicroService: string = 'service-user';
   movieMicroService: string = 'service-movie';
+  showMicroService: string = 'service-show';
 
   constructor() {}
 
@@ -27,18 +28,38 @@ export class HttpUrlsService {
   }
 
   addMovie(): string {
-    return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies`;
   }
 
   getAllMovie(): string {
-    return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movies`;
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies`;
   }
 
   updateMovie(): string {
-    return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies`;
+  }
+
+  getMovieById(id: number): string {
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies/${id}`;
   }
 
   deleteMovie(): string {
     return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
+  }
+
+  getAllShow(): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows`;
+  }
+
+  getShowById(id: string): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
+  }
+
+  addShow(): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows`;
+  }
+
+  updateShow(id: string): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
   }
 }

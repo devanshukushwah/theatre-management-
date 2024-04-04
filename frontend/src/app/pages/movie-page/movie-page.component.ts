@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movie } from 'src/app/common.interface/Movie';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -33,10 +34,6 @@ export class MoviePageComponent implements OnInit {
       console.log(res);
       this.movies = res?.data || [];
     });
-  }
-
-  handleEditMovieButton(movie: Movie) {
-    this.editMovieModalData = movie;
   }
 
   handleUpdateMovie() {

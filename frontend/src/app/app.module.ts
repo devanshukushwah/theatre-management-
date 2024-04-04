@@ -17,6 +17,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.component';
 import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 import { MovieComponent } from './components/forms/movie/movie.component';
+import { ShowPageComponent } from './pages/show-page/show-page.component';
+import { EditMoviePageComponent } from './pages/edit-movie-page/edit-movie-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MovieComponent } from './components/forms/movie/movie.component';
     AddMoviePageComponent,
     MoviePageComponent,
     MovieComponent,
+    ShowPageComponent,
+    EditMoviePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

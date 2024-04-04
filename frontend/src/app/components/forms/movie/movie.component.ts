@@ -7,6 +7,7 @@ import { Movie } from 'src/app/common.interface/Movie';
   styleUrls: ['./movie.component.css'],
 })
 export class MovieComponent implements OnInit {
+  SEPRATOR: string = ', ';
   @Input() movie!: Movie;
   @Input() buttonLabel!: string;
   @Output() handleSubmitEvent = new EventEmitter<Movie>();
@@ -14,4 +15,14 @@ export class MovieComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  handleSubmit() {
+    // console.log(this.movie);
+    // // const movie = {
+    // //   ...this.movie,
+    // //   actors: this.actorsString?.split(this.SEPRATOR),
+    // // };
+
+    this.handleSubmitEvent.emit(this.movie);
+  }
 }

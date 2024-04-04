@@ -2,7 +2,7 @@
   <h2 class="my-4">
     Movie Table
     <ng-container *ngIf="credService.adminControl()">
-      <a routerLink="./add" class="btn btn-sm btn-secondary">Add Movie</a>
+      <a routerLink="/movie/add" class="btn btn-sm btn-secondary">Add Movie</a>
     </ng-container>
   </h2>
   <div class="table-responsive">
@@ -35,14 +35,12 @@
           <ng-container *ngIf="credService.adminControl()">
             <td>
               <div class="d-flex gap-2">
-                <button
+                <a
                   class="btn btn-sm btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editMovieModal"
-                  (click)="handleEditMovieButton(movie)"
+                  [routerLink]="'/movie/edit/' + movie.id"
                 >
                   Edit
-                </button>
+                </a>
                 <button
                   class="btn btn-sm btn-danger ml-2"
                   (click)="handleDeleteMovie(movie.id)"
@@ -58,7 +56,7 @@
   </div>
 
   <!-- Modal -->
-  <div
+  <!-- <div
     class="modal fade"
     id="editMovieModal"
     data-bs-backdrop="static"
@@ -142,5 +140,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

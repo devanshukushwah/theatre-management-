@@ -8,6 +8,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.component';
 import { MoviePageComponent } from './pages/movie-page/movie-page.component';
+import { ShowPageComponent } from './pages/show-page/show-page.component';
+import { EditMoviePageComponent } from './pages/edit-movie-page/edit-movie-page.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,16 @@ const routes: Routes = [
   {
     component: AddMoviePageComponent,
     path: 'movie/add',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: EditMoviePageComponent,
+    path: 'movie/edit/:id',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: ShowPageComponent,
+    path: 'show',
     canActivate: [AuthGuard],
   },
   {

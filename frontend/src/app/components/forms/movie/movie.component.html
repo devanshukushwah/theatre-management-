@@ -1,4 +1,4 @@
-<form (ngSubmit)="handleSubmitEvent.emit()">
+<form (ngSubmit)="handleSubmit()">
   <div class="form-group">
     <label for="name">Name:</label>
     <input
@@ -21,7 +21,7 @@
       [(ngModel)]="movie.duration"
     />
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="actors">Actors:</label>
     <input
       type="text"
@@ -29,9 +29,9 @@
       id="actors"
       placeholder="Enter actors (separated by commas)"
       name="actors"
-      [(ngModel)]="movie.actors"
+      [(ngModel)]="actorsString"
     />
-  </div>
+  </div> -->
   <div class="form-group">
     <label for="director">Director:</label>
     <input

@@ -26,7 +26,8 @@ export class AddMoviePageComponent implements OnInit {
     };
   }
 
-  handleAddMovie(): void {
+  handleAddMovie(movie: Movie): void {
+    if (!movie) return;
     this.movieService.addMovie(this.movie).subscribe((res) => {
       this.clearMovieValues();
     });

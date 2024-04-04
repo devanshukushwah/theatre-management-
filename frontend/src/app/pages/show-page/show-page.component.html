@@ -1,0 +1,55 @@
+<div class="container">
+  <h2 class="my-4">
+    Show Table
+    <ng-container *ngIf="credService.adminControl()">
+      <a routerLink="/show/add" class="btn btn-sm btn-secondary">Add Show</a>
+    </ng-container>
+  </h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Movie Name</th>
+          <th>Duration (minutes)</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Seat</th>
+          <ng-container *ngIf="credService.adminControl()">
+            <th>Operation</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <!-- <tbody>
+        <tr *ngFor="let show of shows">
+          <td>{{ show }}</td>
+          <td>{{ show.duration }}</td>
+          <td>
+            {{ show.actors }}
+          </td>
+          <td>{{ show.director }}</td>
+          <ng-container *ngIf="credService.adminControl()">
+            <td>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editMovieModal"
+                  (click)="handleEditMovieButton(movie)"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-sm btn-danger ml-2"
+                  (click)="handleDeleteMovie(movie.id)"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody> -->
+    </table>
+  </div>
+</div>

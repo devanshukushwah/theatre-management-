@@ -2,7 +2,7 @@
   <h2>Add Movie</h2>
   <app-form-movie
     [movie]="movie"
-    (handleSubmitEvent)="handleAddMovie()"
-    buttonLabel="Submit"
+    (handleSubmitEvent)="handleAddMovie($event)"
+    buttonLabel="Add New Movie"
   ></app-form-movie>
 </div>
