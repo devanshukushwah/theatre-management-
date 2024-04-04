@@ -41,8 +41,8 @@ export class EditMoviePageComponent implements OnInit {
     });
   }
 
-  handleEditMovie(): void {
-    this.movieService.updateMovie(this.movie).subscribe((res) => {
+  handleEditMovie(movie: Movie): void {
+    this.movieService.updateMovie(movie).subscribe((res) => {
       if (res?.data) {
         this.movie = res.data;
       }
