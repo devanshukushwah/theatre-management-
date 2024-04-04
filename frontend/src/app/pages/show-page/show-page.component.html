@@ -20,36 +20,34 @@
           </ng-container>
         </tr>
       </thead>
-      <!-- <tbody>
+      <tbody>
         <tr *ngFor="let show of shows">
-          <td>{{ show }}</td>
-          <td>{{ show.duration }}</td>
+          <td>Movie Name</td>
+          <td>{{ getTimeString(show.duration) }}</td>
+          <td>{{ getDateAndTime(show.startTime) }}</td>
+          <td>{{ getDateAndTime(show.endTime) }}</td>
+          <td>{{ show.bookedSeats }}</td>
           <td>
-            {{ show.actors }}
-          </td>
-          <td>{{ show.director }}</td>
-          <ng-container *ngIf="credService.adminControl()">
-            <td>
-              <div class="d-flex gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-primary">Book now</button>
+              <ng-container *ngIf="credService.adminControl()">
                 <button
                   class="btn btn-sm btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editMovieModal"
-                  (click)="handleEditMovieButton(movie)"
+                  (click)="handleEditShow(show)"
                 >
                   Edit
                 </button>
                 <button
                   class="btn btn-sm btn-danger ml-2"
-                  (click)="handleDeleteMovie(movie.id)"
+                  (click)="handleDeleteShow(show)"
                 >
                   Delete
                 </button>
-              </div>
-            </td>
-          </ng-container>
+              </ng-container>
+            </div>
+          </td>
         </tr>
-      </tbody> -->
+      </tbody>
     </table>
   </div>
 </div>

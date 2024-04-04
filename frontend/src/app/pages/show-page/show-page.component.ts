@@ -27,4 +27,28 @@ export class ShowPageComponent implements OnInit {
       }
     });
   }
+
+  getTimeString(timeInMinutes: number): string {
+    const hours = Math.floor(timeInMinutes / 60);
+    const minutes = timeInMinutes % 60;
+    return `${hours}h ${minutes}m`;
+  }
+
+  getDateAndTime(dateAndTime: Date): string {
+    const currentDate = new Date(dateAndTime);
+    const date = currentDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    });
+    const time = currentDate.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
+    return `${date} ${time}`;
+  }
+
+  handleEditShow(show: Show): void {}
+  handleDeleteShow(show: Show): void {}
 }
