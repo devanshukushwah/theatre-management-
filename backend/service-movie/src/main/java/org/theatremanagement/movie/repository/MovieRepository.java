@@ -13,6 +13,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findByName(String name);
 
-    @Query("SELECT new org.theatremanagement.movie.model.Movie(m.id, m.name) FROM Movie m WHERE m.name LIKE %:keyword%")
+    @Query("SELECT new org.theatremanagement.movie.model.Movie(m.id, m.name) FROM Movie m WHERE m.name ILIKE %:keyword%")
     List<Movie> findIdAndNameByKeyword(@Param("keyword") String keyword);
 }
