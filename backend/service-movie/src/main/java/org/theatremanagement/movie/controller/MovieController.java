@@ -11,39 +11,45 @@ import org.theatremanagement.movie.service.MovieService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = ApplicationConstant.REST_V1_MAPPING_MOVIE)
+@RequestMapping(value = "/api/v1/movies")
 public class MovieController extends BaseController {
 
     @Autowired
     MovieService movieService;
 
-    @GetMapping("movies")
+    @GetMapping
     ResponseEntity<CustomResponse<List<Movie>>> getAllMovie(){
         return getResponseEntityOK(movieService.getAllMovie());
     }
 
-    @GetMapping
-    ResponseEntity<CustomResponse<Movie>> getMovie(@RequestParam(required = true) Long id) {
+    @GetMapping("/{id}")
+    ResponseEntity<CustomResponse<Movie>> getMovie(@PathVariable Long id) {
         Movie Movie = movieService.getMovie(id);
         return getResponseEntityOK(Movie);
     }
 
-    @PostMapping("movie")
+    @PostMapping
     ResponseEntity<CustomResponse<Movie>> createMovie(@RequestBody Movie Movie) {
         Movie createResponse = movieService.createMovie(Movie);
         return getResponseEntityOK(createResponse);
     }
 
-    @PutMapping("movie")
+    @PutMapping
     ResponseEntity<CustomResponse<Movie>> updateMovie(@RequestBody Movie movie) {
         Movie updatedMovie = movieService.updateMovie(movie);
         return getResponseEntityOK(updatedMovie);
     }
 
-    @DeleteMapping("movie")
+    @DeleteMapping
     ResponseEntity<CustomResponse<Boolean>> updateMovie(@RequestParam long id) {
         boolean deleteMovieById = movieService.deleteMovieById(id);
         return getResponseEntityOK(deleteMovieById);
+    }
+
+    @GetMapping("/get-movies-name")
+    ResponseEntity<CustomResponse<Movie>> getMoviesName(@RequestParam("name") String name) {
+         List<Movie> movies = this.movieService.getMoviesName(name);
+         return getResponseEntityOK(movies);
     }
 
 }

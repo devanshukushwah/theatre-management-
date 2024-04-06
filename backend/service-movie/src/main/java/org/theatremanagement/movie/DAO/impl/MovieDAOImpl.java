@@ -41,4 +41,10 @@ public class MovieDAOImpl implements MovieDAO {
     public void deleteMovieById(long id) {
         this.movieRepository.deleteById(id);
     }
+
+
+    @Override
+    public List<Movie> getMoviesName(String name){
+        return this.movieRepository.findIdAndNameByKeyword(name);
+    }
 }

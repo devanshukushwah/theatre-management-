@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Movie")
+@Table(name="MOVIE")
 public class Movie {
 
     @Id
@@ -23,4 +23,9 @@ public class Movie {
     private long duration;
     private List<String> actors;
     private String director;
+
+    Movie(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

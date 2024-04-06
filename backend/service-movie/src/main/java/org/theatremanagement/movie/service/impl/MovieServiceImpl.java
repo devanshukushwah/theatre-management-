@@ -60,4 +60,9 @@ public class MovieServiceImpl implements MovieService {
 
         return movieById == null;
     }
+
+    @Override
+    public List<Movie> getMoviesName(String name) {
+        return this.movieDAO.getMoviesName(name);
+    }
 }

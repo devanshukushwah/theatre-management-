@@ -14,5 +14,7 @@ public interface MovieService {
     public Movie updateMovie(Movie Movie);
 
     public boolean deleteMovieById(long id);
+
+    public List<Movie> getMoviesName(String name);
 }
 
