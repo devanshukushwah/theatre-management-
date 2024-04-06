@@ -59,7 +59,7 @@ export class HttpUrlsService {
     return `${this.baseUrl}/${this.showMicroService}/api/v1/shows`;
   }
 
-  updateShow(id: string): string {
+  updateShow(id: number): string {
     return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpUrlsService } from '../core/http-urls.service';
-import { Movie } from '../common.interface/Movie';
+import { Movie } from '../common/interface/Movie';
 
 @Injectable({
   providedIn: 'root',

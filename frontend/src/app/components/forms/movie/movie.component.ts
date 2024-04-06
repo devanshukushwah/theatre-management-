@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Movie } from 'src/app/common.interface/Movie';
+import { Movie } from 'src/app/common/interface/Movie';
 
 @Component({
   selector: 'app-form-movie',
@@ -17,7 +17,7 @@ import { Movie } from 'src/app/common.interface/Movie';
 export class MovieComponent implements OnInit, OnChanges {
   SEPRATOR: string = ',';
   @Input() movie!: Movie;
-  @Input() buttonLabel!: string;
+  @Input() buttonLabel: string = 'Submit';
   @Output() handleSubmitEvent = new EventEmitter<Movie>();
   actorsString: string | undefined;
 

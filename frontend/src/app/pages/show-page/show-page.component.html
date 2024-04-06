@@ -11,7 +11,7 @@
         <tr>
           <!-- <th>ID</th> -->
           <th>Movie Name</th>
-          <th>Duration (minutes)</th>
+          <th>Duration</th>
           <th>Start Time</th>
           <th>End Time</th>
           <th>Seat</th>
@@ -23,20 +23,20 @@
       <tbody>
         <tr *ngFor="let show of shows">
           <td>Movie Name</td>
-          <td>{{ getTimeString(show.duration) }}</td>
-          <td>{{ getDateAndTime(show.startTime) }}</td>
-          <td>{{ getDateAndTime(show.endTime) }}</td>
-          <td>{{ show.bookedSeats }}</td>
+          <td>{{ dateUtil.getTimeString(show.duration) }}</td>
+          <td>{{ dateUtil.getDateAndTime(show.startTime) }}</td>
+          <td>{{ dateUtil.getDateAndTime(show.endTime) }}</td>
+          <td>{{ getSeatInfo(show) }}</td>
           <td>
             <div class="d-flex gap-2">
               <button class="btn btn-sm btn-primary">Book now</button>
               <ng-container *ngIf="credService.adminControl()">
-                <button
+                <a
                   class="btn btn-sm btn-primary"
-                  (click)="handleEditShow(show)"
+                  [routerLink]="'/show/edit/' + show.id"
                 >
                   Edit
-                </button>
+                </a>
                 <button
                   class="btn btn-sm btn-danger ml-2"
                   (click)="handleDeleteShow(show)"

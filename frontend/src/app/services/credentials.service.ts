@@ -3,7 +3,7 @@ import { HttpUrlsService } from '../core/http-urls.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import { UserDetails } from '../common.interface/UserDetails';
+import { UserDetails } from '../common/interface/UserDetails';
 
 @Injectable({
   providedIn: 'root',

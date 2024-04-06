@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserDetails } from 'src/app/common.interface/UserDetails';
-import { UserProfile } from 'src/app/common.interface/UserProfile';
+import { UserDetails } from 'src/app/common/interface/UserDetails';
+import { UserProfile } from 'src/app/common/interface/UserProfile';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProfileService } from 'src/app/services/profile.service';

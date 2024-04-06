@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpUrlsService } from '../core/http-urls.service';
 import { CredentialsService } from './credentials.service';
 import { Observable } from 'rxjs';
-import { UserProfile } from '../common.interface/UserProfile';
+import { UserProfile } from '../common/interface/UserProfile';
 
 @Injectable({
   providedIn: 'root',

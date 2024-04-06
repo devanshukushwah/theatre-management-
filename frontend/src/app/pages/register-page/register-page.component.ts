@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserDetails } from 'src/app/common.interface/UserDetails';
+import { UserDetails } from 'src/app/common/interface/UserDetails';
 import { HttpUrlsService } from 'src/app/core/http-urls.service';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';

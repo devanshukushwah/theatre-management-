@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Movie } from 'src/app/common.interface/Movie';
+import { Movie } from 'src/app/common/interface/Movie';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { MovieService } from 'src/app/services/movie.service';
 

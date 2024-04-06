@@ -10,6 +10,9 @@ import { AddMoviePageComponent } from './pages/add-movie-page/add-movie-page.com
 import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 import { ShowPageComponent } from './pages/show-page/show-page.component';
 import { EditMoviePageComponent } from './pages/edit-movie-page/edit-movie-page.component';
+import { UnknownPageComponent } from './pages/unknown-page/unknown-page.component';
+import { AddShowPageComponent } from './pages/add-show-page/add-show-page.component';
+import { EditShowPageComponent } from './pages/edit-show-page/edit-show-page.component';
 
 const routes: Routes = [
   {
@@ -46,8 +49,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    component: EditShowPageComponent,
+    path: 'show/edit/:id',
+    canActivate: [AuthGuard],
+  },
+  {
     component: ShowPageComponent,
     path: 'show',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: AddShowPageComponent,
+    path: 'show/add',
     canActivate: [AuthGuard],
   },
   {
@@ -57,7 +70,11 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '404',
+  },
+  {
+    component: UnknownPageComponent,
+    path: '404',
   },
 ];
 

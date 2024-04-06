@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Show } from 'src/app/common.interface/Show';
+import { Show } from 'src/app/common/interface/Show';
+import { DateUtilsService } from 'src/app/common/utility/date-utils.service';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { ShowService } from 'src/app/services/show.service';
 
@@ -13,7 +14,8 @@ export class ShowPageComponent implements OnInit {
 
   constructor(
     public credService: CredentialsService,
-    private showService: ShowService
+    private showService: ShowService,
+    public dateUtil: DateUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -28,25 +30,12 @@ export class ShowPageComponent implements OnInit {
     });
   }
 
-  getTimeString(timeInMinutes: number): string {
-    const hours = Math.floor(timeInMinutes / 60);
-    const minutes = timeInMinutes % 60;
-    return `${hours}h ${minutes}m`;
-  }
+  getSeatInfo(show: Show): number {
+    if (show.bookedSeats >= 0 && show.totalSeats >= 0) {
+      return show.totalSeats - show.bookedSeats;
+    }
 
-  getDateAndTime(dateAndTime: Date): string {
-    const currentDate = new Date(dateAndTime);
-    const date = currentDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-    });
-    const time = currentDate.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
-    return `${date} ${time}`;
+    return 0;
   }
 
   handleEditShow(show: Show): void {}
