@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from 'src/app/common/interface/Movie';
 import { Show } from 'src/app/common/interface/Show';
+import { MovieService } from 'src/app/services/movie.service';
 import { ShowService } from 'src/app/services/show.service';
 
 @Component({
@@ -9,7 +11,10 @@ import { ShowService } from 'src/app/services/show.service';
 })
 export class AddShowPageComponent implements OnInit {
   show!: Show;
-  constructor(private showService: ShowService) {}
+  constructor(
+    private showService: ShowService,
+    public movieService: MovieService
+  ) {}
 
   ngOnInit(): void {
     this.clearMovieValues();
@@ -21,7 +26,7 @@ export class AddShowPageComponent implements OnInit {
       startTime: null,
       endTime: null,
       duration: null,
-      movie: null,
+      movieName: null,
       totalSeats: -1,
       bookedSeats: 0,
     };

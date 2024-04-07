@@ -30,7 +30,7 @@ export class EditShowPageComponent implements OnInit {
       startTime: null,
       endTime: null,
       duration: null,
-      movie: null,
+      movieName: null,
       totalSeats: -1,
       bookedSeats: -1,
     };

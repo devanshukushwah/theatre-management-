@@ -33,4 +33,9 @@ export class MovieService {
   getMovieById(id: number): Observable<any> {
     return this.http.get(this.httpUrlsService.getMovieById(id));
   }
+
+  getMoviesName(name: string): Observable<any> {
+    const params: HttpParams = new HttpParams().set('name', name);
+    return this.http.get(this.httpUrlsService.getMovieName(), { params });
+  }
 }

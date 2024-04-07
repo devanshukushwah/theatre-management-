@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let show of shows">
-          <td>Movie Name</td>
+          <td>{{ show.movieName }}</td>
           <td>{{ dateUtil.getTimeString(show.duration) }}</td>
           <td>{{ dateUtil.getDateAndTime(show.startTime) }}</td>
           <td>{{ dateUtil.getDateAndTime(show.endTime) }}</td>

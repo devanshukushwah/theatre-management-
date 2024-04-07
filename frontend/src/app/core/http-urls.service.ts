@@ -44,7 +44,7 @@ export class HttpUrlsService {
   }
 
   deleteMovie(): string {
-    return `${this.baseUrl}/${this.movieMicroService}/rest/v1/movie/movie`;
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies`;
   }
 
   getAllShow(): string {
@@ -61,5 +61,9 @@ export class HttpUrlsService {
 
   updateShow(id: number): string {
     return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
+  }
+
+  getMovieName() {
+    return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies/get-movies-name`;
   }
 }

@@ -18,8 +18,31 @@
       id="duration"
       placeholder="Enter movie name"
       name="movie"
-      [(ngModel)]="show.movie"
+      [(ngModel)]="show.movieName"
+      (input)="handleMovieInputChangeMethod()"
+      [ngClass]="{
+        'b-bl-r-0': isMovieInputDropdown,
+        'b-br-r-0': isMovieInputDropdown
+      }"
     />
+    <div
+      class="list-group"
+      *ngFor="let movie of movieDropdownValues; let idx = index"
+    >
+      <button
+        type="button"
+        class="list-group-item list-group-item-action"
+        (click)="selectMovie(movie)"
+        [ngClass]="{
+          'b-tl-r-0': isMovieInputDropdown,
+          'b-tr-r-0': isMovieInputDropdown,
+          'b-bl-r-0': idx != movieDropdownValues.length - 1,
+          'b-br-r-0': idx != movieDropdownValues.length - 1
+        }"
+      >
+        {{ movie?.name }}
+      </button>
+    </div>
   </div>
   <div class="form-group">
     <label for="actors">Total Seats:</label>
