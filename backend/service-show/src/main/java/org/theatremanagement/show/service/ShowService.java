@@ -11,6 +11,6 @@ public interface ShowService {
 
     public boolean createShow(Show show);
 
-    public Show updateShow(Show show);
+    public Show updateShow(long id, Show show);
 }
 

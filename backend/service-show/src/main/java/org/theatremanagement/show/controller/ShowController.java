@@ -11,19 +11,19 @@ import org.theatremanagement.show.service.ShowService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = ApplicationConstant.REST_V1_SHOW)
+@RequestMapping(value = "/api/v1/shows")
 public class ShowController extends BaseController {
 
     @Autowired
     ShowService showService;
 
-    @GetMapping(ApplicationConstant.STRING_ALL)
+    @GetMapping
     ResponseEntity<CustomResponse> getAllShow(){
         return getResponseEntityOK(showService.getAllShow());
     }
 
-    @GetMapping
-    ResponseEntity<CustomResponse> getShow(@RequestParam(required = true) Long id) {
+    @GetMapping("{id}")
+    ResponseEntity<CustomResponse> getShow(@PathVariable Long id) {
         Show show = showService.getShow(id);
         return getResponseEntityOK(show);
     }
@@ -34,9 +34,9 @@ public class ShowController extends BaseController {
         return getResponseEntityOK(createResponse);
     }
 
-    @PutMapping
-    ResponseEntity<CustomResponse> updateShow(@RequestBody Show show) {
-        Show updatedShow = showService.updateShow(show);
+    @PutMapping("/{id}")
+    ResponseEntity<CustomResponse> updateShow(@PathVariable long id, @RequestBody Show show) {
+        Show updatedShow = showService.updateShow(id, show);
         return getResponseEntityOK(updatedShow);
     }
 

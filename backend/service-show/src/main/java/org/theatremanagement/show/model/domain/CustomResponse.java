@@ -9,5 +9,5 @@ import lombok.Data;
 public class CustomResponse<T> {
     private boolean success;
     private T data;
-    private Object error;
+    private String responseMessage;
 }

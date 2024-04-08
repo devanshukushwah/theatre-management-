@@ -24,8 +24,8 @@ public class Show {
     private long id;
     private Date startTime;
     private Date endTime;
-    private long Duration;
-    private long movie;
+    private long movieId;
+    private String movieName;
     private int totalSeats;
     private int bookedSeats;
 }
