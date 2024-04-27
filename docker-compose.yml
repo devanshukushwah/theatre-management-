@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+
+  # PostgresSQL Database
+  postgres:
+    image: postgres:16.2
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+    volumes:
+      - /f/db-data/postgresql/16/data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - theatre-management-network
+
+  # Movie microservice
+  service-user:
+    image: devanshukushwah/theatre-management-service-user:0.0.1-SNAPSHOT
+    container_name: service-user
+    environment:
+      DB_HOST_NAME: postgres
+    depends_on:
+      - postgres
+      - service-registry
+    restart: always
+    networks:
+      - theatre-management-network
+
+  # Movie microservice
+  service-movie:
+    image: devanshukushwah/theatre-management-service-movie:0.0.1-SNAPSHOT
+    container_name: service-movie
+    environment:
+      DB_HOST_NAME: postgres
+    depends_on:
+      - postgres
+      - service-registry
+    restart: always
+    networks:
+      - theatre-management-network
+
+
+  # Show microservice
+  service-show:
+    image: devanshukushwah/theatre-management-service-show:0.0.1-SNAPSHOT
+    container_name: service-show
+    environment:
+      DB_HOST_NAME: postgres
+    depends_on:
+      - postgres
+      - service-registry
+    restart: always
+    networks:
+      - theatre-management-network
+
+  # Eureka server
+  service-registry:
+    image: devanshukushwah/theatre-management-service-registry:0.0.1-SNAPSHOT
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - theatre-management-network
+
+  # API gateway microservice
+  api-gateway:
+    image: devanshukushwah/theatre-management-api-gateway:0.0.1-SNAPSHOT
+    container_name: api-gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - service-registry
+    restart: always
+    networks:
+      - theatre-management-network
+
+
+# separate network for theatre management application.
+networks:
+  theatre-management-network:
