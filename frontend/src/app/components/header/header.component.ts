@@ -10,7 +10,7 @@ import { RouterService } from 'src/app/services/router.service';
 export class HeaderComponent implements OnInit {
   constructor(
     private credService: CredentialsService,
-    private routerService: RouterService
+    public routerService: RouterService
   ) {}
 
   ngOnInit(): void {}

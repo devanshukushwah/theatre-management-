@@ -1,8 +1,10 @@
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ResponseModel } from 'src/app/common/interface/ResponseModel';
 import { UserDetails } from 'src/app/common/interface/UserDetails';
 import { UserProfile } from 'src/app/common/interface/UserProfile';
+import { EditProfileDialogComponent } from 'src/app/components/edit-profile-dialog/edit-profile-dialog.component';
 import { CredentialsService } from 'src/app/services/credentials.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -13,12 +15,11 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
-  isEdit: boolean = false;
-  isUpdateButtonLoader: boolean = false;
   userProfile!: UserProfile;
   constructor(
     private profileService: ProfileService,
-    private credService: CredentialsService
+    private credService: CredentialsService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -31,22 +32,14 @@ export class ProfilePageComponent implements OnInit {
       });
   }
 
-  handleUpdateProfile(): void {
-    this.isUpdateButtonLoader = true;
-    this.profileService.updateProfile(this.userProfile).subscribe(
-      (res: ResponseModel) => {
-        if (res && !res.data) {
-          this.userProfile = res.data;
-        }
-        this.isUpdateButtonLoader = false;
-      },
-      (err) => {
-        this.isUpdateButtonLoader = false;
-      }
-    );
-  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+      width: '400px',
+      data: { ...this.userProfile },
+    });
 
-  toggleEdit() {
-    this.isEdit = !this.isEdit;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.userProfile = result;
+    });
   }
 }

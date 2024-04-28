@@ -1,125 +1,36 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3 mt-5">
-      <h2 class="text-center mb-4">
-        User Profile
-        <button class="btn btn-sm btn-secondary" (click)="toggleEdit()">
-          {{ isEdit ? "Disable" : "Enable" }} Edit
-        </button>
-      </h2>
-      <form
-        (ngSubmit)="handleUpdateProfile()"
-        #form="ngForm"
-        *ngIf="isEdit; else OnlyShow"
-      >
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            placeholder="Enter your first name"
-            [(ngModel)]="userProfile.firstName"
-            name="firstName"
-          />
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            placeholder="Enter your last name"
-            [(ngModel)]="userProfile.lastName"
-            name="lastName"
-          />
-        </div>
-        <div class="form-group">
-          <label for="phoneNumber">Phone Number</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="phoneNumber"
-            placeholder="Enter your phone number"
-            [(ngModel)]="userProfile.phoneNumber"
-            name="phoneNumber"
-          />
-        </div>
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input
-            type="number"
-            class="form-control"
-            id="age"
-            placeholder="Enter your age"
-            [(ngModel)]="userProfile.age"
-            name="age"
-          />
-        </div>
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <select
-            class="form-control"
-            id="gender"
-            [(ngModel)]="userProfile.gender"
-            name="gender"
-          >
-            <option value="MALE">MALE</option>
-            <option value="FEMALE">FEMALE</option>
-            <option value="OTHER">OTHER</option>
-          </select>
-        </div>
-        <!-- <div class="form-group">
-          <label for="role">Role</label>
-          <input
-            type="text"
-            class="form-control"
-            id="role"
-            placeholder="Enter your role"
-          />
-        </div> -->
-        <div class="d-flex justify-content-end gap-2 mt-3">
-          <button
-            type="button"
-            class="btn btn-sm btn-light"
-            (click)="toggleEdit()"
-          >
-            Cancel
-          </button>
-          <app-button-loader
-            type="submit"
-            label="Update"
-            [disabled]="isUpdateButtonLoader"
-          ></app-button-loader>
-        </div>
-      </form>
+<div class="p-1">
+  <h2 class="d-flex align-item-c gap-1">
+    User Profile
+    <!-- <button (click)="toggleEdit()">
+      {{ isEdit ? "Disable" : "Enable" }} Edit
+    </button> -->
+    <button mat-icon-button (click)="openDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </h2>
 
-      <ng-template #OnlyShow>
-        <app-profile-field
-          title="Firstname"
-          [value]="userProfile && userProfile.firstName"
-        ></app-profile-field>
-        <br />
-        <app-profile-field
-          title="Lastname"
-          [value]="userProfile && userProfile.lastName"
-        ></app-profile-field>
-        <br />
-        <app-profile-field
-          title="Phone number"
-          [value]="userProfile && userProfile.phoneNumber"
-        ></app-profile-field>
-        <br />
-        <app-profile-field
-          title="Age"
-          [value]="userProfile && userProfile.age"
-        ></app-profile-field>
-        <br />
-        <app-profile-field
-          title="Gender"
-          [value]="userProfile && userProfile.gender"
-        ></app-profile-field>
-      </ng-template>
-    </div>
-  </div>
+  <app-profile-field
+    title="Firstname"
+    [value]="userProfile && userProfile.firstName"
+  ></app-profile-field>
+  <br />
+  <app-profile-field
+    title="Lastname"
+    [value]="userProfile && userProfile.lastName"
+  ></app-profile-field>
+  <br />
+  <app-profile-field
+    title="Phone number"
+    [value]="userProfile && userProfile.phoneNumber"
+  ></app-profile-field>
+  <br />
+  <app-profile-field
+    title="Age"
+    [value]="userProfile && userProfile.age"
+  ></app-profile-field>
+  <br />
+  <app-profile-field
+    title="Gender"
+    [value]="userProfile && userProfile.gender"
+  ></app-profile-field>
 </div>

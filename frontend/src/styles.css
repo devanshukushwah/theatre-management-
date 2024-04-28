@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* html,
+body {
+  height: 100%;
+} */
+body {
+  margin: 0;
+  background-color: #efefef;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+}
+
+.d-flex-justify-end {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-sb {
+  justify-content: space-between;
+}
+
+.align-item-c {
+  align-items: center;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.jc-end {
+  justify-content: end;
+}

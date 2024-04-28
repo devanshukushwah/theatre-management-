@@ -14,4 +14,8 @@ export class RouterService {
   navigateToLoginPage(): void {
     this.router.navigate(['/login']);
   }
+
+  isLoginSignUpPage(): boolean {
+    return this.router.url === '/login' || this.router.url === '/signup';
+  }
 }

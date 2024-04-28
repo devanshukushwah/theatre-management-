@@ -1,62 +1,49 @@
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="height: 100vh"
->
-  <div class="card" style="min-width: 350px">
-    <div class="card-body">
-      <h5 class="card-title text-center">Create User Page</h5>
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>SignUp</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <form (ngSubmit)="handleCreateUser()">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
           <input
-            type="email"
-            class="form-control"
-            id="email"
+            matInput
+            placeholder="email"
             name="email"
-            placeholder="Enter email"
             [(ngModel)]="email"
           />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
           <input
+            matInput
             type="password"
-            class="form-control"
-            id="password"
+            placeholder="Password"
             name="password"
             [(ngModel)]="password"
-            placeholder="Password"
           />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Confirm Password</label>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
           <input
+            matInput
             type="password"
-            class="form-control"
-            id="confirm-password"
+            placeholder="Confirm Password"
             name="confirmPassword"
             [(ngModel)]="confirmPassword"
-            placeholder="Confirm Password"
           />
+        </mat-form-field>
+        <!-- <mat-card-actions align="end"> -->
+        <div class="d-flex-justify-end gap-1">
+          <a mat-button routerLink="/login">Login</a>
+          <button mat-raised-button color="primary">
+            Create
+            <!-- <mat-spinner color="accent" diameter="24"></mat-spinner> -->
+          </button>
+          <!-- </mat-card-actions> -->
         </div>
-        <!-- <button type="submit" class="btn btn-primary">Create</button> -->
-        <button
-          class="btn btn-sm btn-primary"
-          type="submit"
-          [disabled]="isDisabled"
-        >
-          <span *ngIf="!isDisabled">Submit</span>
-          <span *ngIf="isDisabled">
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Loading...
-          </span>
-        </button>
       </form>
-      <a routerLink="/login">Login</a>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>

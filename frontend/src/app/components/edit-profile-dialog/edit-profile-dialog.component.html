@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>Edit User Profile</h1>
+<form (ngSubmit)="handleUpdateProfile()" #form="ngForm">
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>First name</mat-label>
+    <input
+      matInput
+      placeholder="First name"
+      [(ngModel)]="userProfile.firstName"
+      name="firstName"
+    />
+  </mat-form-field>
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input
+      matInput
+      placeholder="Last name"
+      [(ngModel)]="userProfile.lastName"
+      name="lastName"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input
+      matInput
+      placeholder="Phone number"
+      type="number"
+      [(ngModel)]="userProfile.phoneNumber"
+      name="phoneNumber"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Age</mat-label>
+    <input
+      matInput
+      placeholder="Age"
+      type="number"
+      min="1"
+      max="100"
+      [(ngModel)]="userProfile.age"
+      name="age"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Gender</mat-label>
+    <input
+      matInput
+      placeholder="Gender"
+      [matAutocomplete]="auto"
+      [(ngModel)]="userProfile.gender"
+      name="gender"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let item of genderOptions" [value]="item">
+        {{ item }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="d-flex gap-1 jc-end">
+    <button mat-button (click)="onNoClick()" type="button">Cancel</button>
+    <button mat-flat-button color="primary" type="submit">Update</button>
+  </div>
+</form>

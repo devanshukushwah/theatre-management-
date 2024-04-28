@@ -1,51 +1,40 @@
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="height: 100vh"
->
-  <div class="card" style="min-width: 350px">
-    <div class="card-body">
-      <h5 class="card-title text-center">Login Page</h5>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <form (ngSubmit)="handleLogin()">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
           <input
-            type="email"
-            class="form-control"
-            id="email"
+            matInput
+            placeholder="email"
             name="email"
             [(ngModel)]="email"
-            placeholder="Enter email"
           />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
           <input
+            matInput
             type="password"
-            class="form-control"
-            id="password"
+            placeholder="Password"
             name="password"
             [(ngModel)]="password"
-            placeholder="Password"
           />
+        </mat-form-field>
+        <div class="d-flex-justify-end gap-1">
+          <!-- <mat-card-actions align="end"> -->
+          <a mat-button routerLink="/signup">Create Account</a>
+          <button mat-raised-button color="primary">
+            Login
+
+            <!-- <mat-spinner color="accent" diameter="24"></mat-spinner> -->
+          </button>
+          <!-- </mat-card-actions> -->
         </div>
-        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
-        <button
-          class="btn btn-sm btn-primary"
-          type="submit"
-          [disabled]="isDisabled"
-        >
-          <span *ngIf="!isDisabled">Login</span>
-          <span *ngIf="isDisabled">
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Loading...
-          </span>
-        </button>
       </form>
-      <a routerLink="/signup">Create Account</a>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>
