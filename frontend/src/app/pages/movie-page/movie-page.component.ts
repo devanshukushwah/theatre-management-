@@ -19,10 +19,22 @@ export class MoviePageComponent implements OnInit {
     director: null,
   };
 
+  displayedColumns: string[] = ['name', 'duration', 'actors', 'director'];
+
   constructor(
     private movieService: MovieService,
     public credService: CredentialsService
-  ) {}
+  ) {
+    if (credService.adminControl()) {
+      this.displayedColumns = [
+        'name',
+        'duration',
+        'actors',
+        'director',
+        'operation',
+      ];
+    }
+  }
 
   ngOnInit(): void {
     this.movies = [];

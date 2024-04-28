@@ -39,6 +39,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { EditProfileDialogComponent } from './components/edit-profile-dialog/edit-profile-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatAutocompleteModule,
     MatIconModule,
     MatChipsModule,
+    MatTableModule,
   ],
   providers: [
     HttpUrlsService,
