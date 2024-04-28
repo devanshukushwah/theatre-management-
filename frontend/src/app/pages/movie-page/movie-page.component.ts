@@ -15,7 +15,7 @@ export class MoviePageComponent implements OnInit {
     id: null, // Initialize with appropriate default values
     name: null,
     duration: null,
-    actors: null,
+    actors: [],
     director: null,
   };
 
@@ -31,7 +31,6 @@ export class MoviePageComponent implements OnInit {
 
   getAllMovie(): void {
     this.movieService.getAllMovies().subscribe((res) => {
-      console.log(res);
       this.movies = res?.data || [];
     });
   }

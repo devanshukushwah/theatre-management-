@@ -21,14 +21,15 @@ export class AddMoviePageComponent implements OnInit {
       id: null, // Initialize with appropriate default values
       name: null,
       duration: null,
-      actors: null,
+      actors: [],
       director: null,
     };
   }
 
   handleAddMovie(movie: Movie): void {
     if (!movie) return;
-    this.movieService.addMovie(this.movie).subscribe((res) => {
+
+    this.movieService.addMovie(movie).subscribe((res) => {
       this.clearMovieValues();
     });
   }

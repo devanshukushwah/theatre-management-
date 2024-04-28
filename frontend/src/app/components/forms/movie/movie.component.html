@@ -1,54 +1,52 @@
 <form (ngSubmit)="handleSubmit()">
-  <div class="form-group">
-    <label for="name">Name:</label>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput required name="name" [(ngModel)]="movie.name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Duration in minutes</mat-label>
     <input
-      type="text"
-      class="form-control"
-      id="name"
-      placeholder="Enter movie name"
-      name="name"
-      [(ngModel)]="movie.name"
-    />
-  </div>
-  <div class="form-group">
-    <label for="duration">Duration (in minutes):</label>
-    <input
+      matInput
       type="number"
-      class="form-control"
-      id="duration"
-      placeholder="Enter duration"
       name="duration"
       [(ngModel)]="movie.duration"
+      required
     />
-  </div>
-  <div class="form-group">
-    <label for="actors">Actors:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="actors"
-      placeholder="Enter actors (separated by commas)"
-      name="actorsString"
-      [(ngModel)]="actorsString"
-    />
-  </div>
-  <!-- <div class="form-group">
-    <label for="actors">Actors: </label>
-    <br />
-    <span class="badge text-bg-secondary">New</span>
-  </div> -->
-  <div class="form-group">
-    <label for="director">Director:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="director"
-      placeholder="Enter director"
-      name="director"
-      [(ngModel)]="movie.director"
-    />
-  </div>
-  <button type="submit" class="btn btn-sm btn-primary mt-2">
+  </mat-form-field>
+
+  <mat-form-field
+    class="example-chip-list"
+    appearance="fill"
+    class="full-width"
+  >
+    <mat-label>Actors</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let actor of movie.actors"
+        (removed)="removeActor(actor)"
+      >
+        {{ actor }}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input
+        placeholder="Actors"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="addActor($event)"
+      />
+    </mat-chip-list>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Director</mat-label>
+    <input matInput name="director" [(ngModel)]="movie.director" required />
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">
     {{ buttonLabel }}
   </button>
 </form>

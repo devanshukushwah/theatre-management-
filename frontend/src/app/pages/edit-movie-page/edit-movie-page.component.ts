@@ -28,7 +28,7 @@ export class EditMoviePageComponent implements OnInit {
       id: null, // Initialize with appropriate default values
       name: null,
       duration: null,
-      actors: null,
+      actors: [],
       director: null,
     };
   }
@@ -42,6 +42,8 @@ export class EditMoviePageComponent implements OnInit {
   }
 
   handleEditMovie(movie: Movie): void {
+    console.log(movie);
+
     this.movieService.updateMovie(movie).subscribe((res) => {
       if (res?.data) {
         this.movie = res.data;
