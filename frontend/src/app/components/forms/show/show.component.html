@@ -1,62 +1,40 @@
 <form (ngSubmit)="handleSubmit()">
-  <div class="form-group">
-    <label for="name">Start Time:</label>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Movie name</mat-label>
     <input
-      type="datetime-local"
-      class="form-control"
-      id="name"
-      placeholder="Enter movie name"
+      matInput
+      name="movieName"
+      type="text"
+      [(ngModel)]="show.movieName"
+      (click)="openSearchMovieDialog()"
+      (keypress)="handleMovieNameKeyPress($event)"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Start time</mat-label>
+    <input
+      matInput
+      required
       name="startTime"
+      type="datetime-local"
       [(ngModel)]="show.startTime"
     />
-  </div>
-  <div class="form-group">
-    <label for="duration">Movie:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="duration"
-      placeholder="Enter movie name"
-      name="movie"
-      [(ngModel)]="show.movieName"
-      (input)="handleMovieInputChangeMethod()"
-      [ngClass]="{
-        'b-bl-r-0': isMovieInputDropdown,
-        'b-br-r-0': isMovieInputDropdown
-      }"
-    />
-    <div
-      class="list-group"
-      *ngFor="let movie of movieDropdownValues; let idx = index"
-    >
-      <button
-        type="button"
-        class="list-group-item list-group-item-action"
-        (click)="selectMovie(movie)"
-        [ngClass]="{
-          'b-tl-r-0': isMovieInputDropdown,
-          'b-tr-r-0': isMovieInputDropdown,
-          'b-bl-r-0': idx != movieDropdownValues.length - 1,
-          'b-br-r-0': idx != movieDropdownValues.length - 1
-        }"
-      >
-        {{ movie?.name }}
-      </button>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="actors">Total Seats:</label>
-    <input
-      type="number"
-      class="form-control"
-      id="actors"
-      placeholder="Enter total seats"
-      name="totalSeats"
-      [(ngModel)]="show.totalSeats"
-    />
-  </div>
+  </mat-form-field>
 
-  <button type="submit" class="btn btn-sm btn-primary mt-2">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Total seats</mat-label>
+    <input
+      matInput
+      required
+      name="totalSeats"
+      type="number"
+      [(ngModel)]="show.totalSeats"
+      min="1"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">
     {{ buttonLabel }}
   </button>
 </form>

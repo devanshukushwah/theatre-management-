@@ -40,6 +40,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditProfileDialogComponent } from './components/edit-profile-dialog/edit-profile-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { SearchMovieDialogComponent } from './components/search-movie-dialog/search-movie-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,7 @@ import { MatTableModule } from '@angular/material/table';
     AddShowPageComponent,
     ShowComponent,
     EditProfileDialogComponent,
+    SearchMovieDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatChipsModule,
     MatTableModule,
+    MatListModule,
+    MatDividerModule,
   ],
   providers: [
     HttpUrlsService,

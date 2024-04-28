@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from 'src/app/common/interface/Movie';
 import { Show } from 'src/app/common/interface/Show';
 import { MovieService } from 'src/app/services/movie.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchMovieDialogComponent } from '../../search-movie-dialog/search-movie-dialog.component';
 
 @Component({
   selector: 'app-form-show',
@@ -14,7 +16,7 @@ export class ShowComponent implements OnInit {
   @Input() buttonLabel: string = 'Submit';
   movieDropdownValues: Movie[] = [];
   isMovieInputDropdown: boolean = false;
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -50,5 +52,26 @@ export class ShowComponent implements OnInit {
     this.show.movieName = movie.name;
     this.show.movieId = movie.id;
     this.movieDropdownValues = [];
+  }
+
+  openSearchMovieDialog() {
+    const dialogRef = this.dialog.open(SearchMovieDialogComponent, {
+      width: '500px',
+      // data: { ...this.userProfile },
+    });
+
+    dialogRef.afterClosed().subscribe((result: Movie) => {
+      // if (result) this.userProfile = result;
+      // console.log(result);
+      if (result) {
+        this.show.movieName = result.name;
+        this.show.movieId = result.id;
+      }
+    });
+  }
+
+  handleMovieNameKeyPress(event: any) {
+    event.preventDefault();
+    this.openSearchMovieDialog();
   }
 }

@@ -1,8 +1,8 @@
-<div class="container">
+<div class="p-1">
   <h2 class="my-4">
     Show Table
     <ng-container *ngIf="credService.adminControl()">
-      <a routerLink="/show/add" class="btn btn-sm btn-secondary">Add Show</a>
+      <button mat-stroked-button routerLink="/show/add">Add Show</button>
     </ng-container>
   </h2>
   <div class="table-responsive">

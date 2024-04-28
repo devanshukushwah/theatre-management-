@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Select Movie</h1>
+<mat-list>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Search Movie</mat-label>
+    <input
+      matInput
+      placeholder="Search Movie"
+      name="searchMovieName"
+      [(ngModel)]="searchMovieName"
+      (keyup)="handleChange()"
+    />
+  </mat-form-field>
+
+  <ng-container *ngFor="let movie of movieList; let last = last">
+    <mat-list-item class="list-item" (click)="handleMovieItemClicked(movie)">{{
+      movie.name
+    }}</mat-list-item>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </ng-container>
+
+  <div class="d-flex gap-1 jc-end pt-1">
+    <button mat-button (click)="onNoClick()" type="button">Close</button>
+  </div>
+</mat-list>

@@ -30,8 +30,6 @@ export class EditProfileDialogComponent implements OnInit {
   }
 
   handleUpdateProfile(): void {
-    console.log('click edi pro upd');
-
     // this.isUpdateButtonLoader = true;
     this.profileService.updateProfile(this.userProfile).subscribe(
       (res: ResponseModel) => {

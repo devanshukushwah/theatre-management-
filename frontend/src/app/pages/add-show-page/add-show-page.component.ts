@@ -27,18 +27,12 @@ export class AddShowPageComponent implements OnInit {
       endTime: null,
       duration: null,
       movieName: null,
-      totalSeats: -1,
+      totalSeats: 1,
       bookedSeats: 0,
     };
   }
 
   handleAddShow(show: Show): void {
-    // this.movieService.updateMovie(movie).subscribe((res) => {
-    //   if (res?.data) {
-    //     this.movie = res.data;
-    //   }
-    // });
-
     this.showService.addShow(show).subscribe((res) => {
       if (res?.success) {
         this.clearMovieValues();
