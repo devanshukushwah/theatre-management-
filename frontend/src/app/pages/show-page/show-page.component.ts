@@ -12,11 +12,30 @@ import { ShowService } from 'src/app/services/show.service';
 export class ShowPageComponent implements OnInit {
   shows: Show[] = [];
 
+  displayedColumns: string[] = [
+    'movieName',
+    'duration',
+    'startTime',
+    'endTime',
+    'seats',
+  ];
+
   constructor(
     public credService: CredentialsService,
     private showService: ShowService,
     public dateUtil: DateUtilsService
-  ) {}
+  ) {
+    if (credService.adminControl()) {
+      this.displayedColumns = [
+        'movieName',
+        'duration',
+        'startTime',
+        'endTime',
+        'seats',
+        'operation',
+      ];
+    }
+  }
 
   ngOnInit(): void {
     this.getAllShow();
@@ -30,12 +49,13 @@ export class ShowPageComponent implements OnInit {
     });
   }
 
-  getSeatInfo(show: Show): number {
+  getSeatInfo(show: Show): string {
     if (show.bookedSeats >= 0 && show.totalSeats >= 0) {
-      return show.totalSeats - show.bookedSeats;
+      const remSeats: number = show.totalSeats - show.bookedSeats;
+      return remSeats.toString();
     }
 
-    return 0;
+    return '';
   }
 
   handleEditShow(show: Show): void {}

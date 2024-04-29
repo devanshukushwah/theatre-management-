@@ -47,3 +47,22 @@ body {
 .jc-end {
   justify-content: end;
 }
+
+.d-grid {
+  display: grid;
+}
+
+.single-row {
+  grid-template-columns: auto 1fr auto; /* Three columns, first and third auto size, middle takes remaining space */
+  grid-template-rows: auto; /* Single row */
+}
+
+.top-left {
+  grid-column: 1; /* Place in first column */
+  grid-row: 1; /* Place in first row */
+}
+
+.top-right {
+  grid-column: 3; /* Place in third column */
+  grid-row: 1; /* Place in first row */
+}
