@@ -1,5 +1,5 @@
 export interface Show {
-  id: number | null | undefined;
+  id?: number;
   startTime: string | null | undefined;
   endTime: string | null | undefined;
   duration: number | null | undefined;
@@ -7,4 +7,5 @@ export interface Show {
   movieName: string | null | undefined;
   totalSeats: number;
   bookedSeats: number;
+  isBooked?: boolean;
 }

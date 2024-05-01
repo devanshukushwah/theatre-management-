@@ -12,7 +12,6 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviePageComponent implements OnInit {
   movies!: Movie[];
   editMovieModalData: Movie = {
-    id: null, // Initialize with appropriate default values
     name: null,
     duration: null,
     actors: [],

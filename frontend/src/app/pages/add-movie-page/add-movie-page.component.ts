@@ -18,7 +18,6 @@ export class AddMoviePageComponent implements OnInit {
 
   clearMovieValues(): void {
     this.movie = {
-      id: null, // Initialize with appropriate default values
       name: null,
       duration: null,
       actors: [],

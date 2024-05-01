@@ -28,4 +28,8 @@ export class ShowService {
   getShowById(id: string): Observable<any> {
     return this.http.get(this.httpUrlsService.getShowById(id));
   }
+
+  deleteShowById(id: number): Observable<any> {
+    return this.http.delete(this.httpUrlsService.deleteShowById(id));
+  }
 }

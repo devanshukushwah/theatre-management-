@@ -22,7 +22,6 @@ export class AddShowPageComponent implements OnInit {
 
   clearMovieValues(): void {
     this.show = {
-      id: null,
       startTime: null,
       endTime: null,
       duration: null,

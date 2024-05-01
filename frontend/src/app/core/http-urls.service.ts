@@ -63,6 +63,10 @@ export class HttpUrlsService {
     return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
   }
 
+  deleteShowById(id: number): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/${id}`;
+  }
+
   getMovieName() {
     return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies/get-movies-name`;
   }

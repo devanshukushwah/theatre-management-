@@ -1,5 +1,5 @@
 export interface Movie {
-  id: number | null | undefined;
+  id?: number;
   duration?: number | null | undefined;
   name: string | null | undefined;
   actors: string[];

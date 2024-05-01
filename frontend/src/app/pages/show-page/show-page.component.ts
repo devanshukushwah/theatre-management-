@@ -18,6 +18,7 @@ export class ShowPageComponent implements OnInit {
     'startTime',
     'endTime',
     'seats',
+    'book',
   ];
 
   constructor(
@@ -51,6 +52,12 @@ export class ShowPageComponent implements OnInit {
     return '';
   }
 
-  handleEditShow(show: Show): void {}
-  handleDeleteShow(show: Show): void {}
+  handleDeleteShow(show: Show): void {
+    if (!show.id) return;
+
+    this.showService.deleteShowById(show.id).subscribe((res) => {
+      console.log('show deleted');
+    });
+  }
+  handleBookShow(show: Show): void {}
 }
