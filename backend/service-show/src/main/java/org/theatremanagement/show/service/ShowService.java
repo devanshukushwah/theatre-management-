@@ -12,5 +12,7 @@ public interface ShowService {
     public boolean createShow(Show show);
 
     public Show updateShow(long id, Show show);
+
+    public boolean deleteShow(Long id);
 }
 

@@ -77,4 +77,10 @@ public class ShowServiceImpl implements ShowService {
         }
         return null;
     }
+
+    @Override
+    public boolean deleteShow(Long id) {
+        this.showDAO.deleteShowById(id);
+        return this.showDAO.getShowById(id) == null;
+    }
 }

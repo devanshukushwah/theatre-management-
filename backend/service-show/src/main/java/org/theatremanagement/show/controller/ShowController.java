@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.theatremanagement.show.constant.ApplicationConstant;
+import org.theatremanagement.show.constant.ApplicationMessage;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
 import org.theatremanagement.show.service.ShowService;
@@ -38,6 +39,16 @@ public class ShowController extends BaseController {
     ResponseEntity<CustomResponse> updateShow(@PathVariable long id, @RequestBody Show show) {
         Show updatedShow = showService.updateShow(id, show);
         return getResponseEntityOK(updatedShow);
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<CustomResponse> deleteShow(@PathVariable long id, @RequestBody Show show) {
+        boolean deleteShow = showService.deleteShow(id);
+        if (deleteShow) {
+            return getResponseEntityOK(true, ApplicationMessage.SHOW_DELETED_SUCCESSFULLY.getMessage());
+        } else {
+            return getResponseEntityFailed(false, ApplicationMessage.UNABLE_TO_DELETE_SHOW.getMessage());
+        }
     }
 
 }

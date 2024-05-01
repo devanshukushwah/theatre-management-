@@ -30,4 +30,9 @@ public class ShowDAOImpl implements ShowDAO {
     public Show save(Show show) {
         return this.showRepository.save(show);
     }
+
+    @Override
+    public void deleteShowById(Long id) {
+         this.showRepository.deleteById(id);
+    }
 }

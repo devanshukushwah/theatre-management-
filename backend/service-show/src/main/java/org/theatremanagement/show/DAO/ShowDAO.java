@@ -11,4 +11,6 @@ public interface ShowDAO {
 
     public Show save(Show show);
 
+    public void deleteShowById(Long id);
+
 }
