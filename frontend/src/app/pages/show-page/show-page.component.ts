@@ -26,14 +26,7 @@ export class ShowPageComponent implements OnInit {
     public dateUtil: DateUtilsService
   ) {
     if (credService.adminControl()) {
-      this.displayedColumns = [
-        'movieName',
-        'duration',
-        'startTime',
-        'endTime',
-        'seats',
-        'operation',
-      ];
+      this.displayedColumns.push('admin');
     }
   }
 

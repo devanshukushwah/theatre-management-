@@ -1,13 +1,12 @@
 <div class="p-1">
-  <!-- <div> -->
-  <h2>
-    Movie Table
-
+  <div class="d-flex align-items-c justify-content-sb">
+    <h2 class="m-0-ni">Movies</h2>
     <ng-container *ngIf="credService.adminControl()">
       <button mat-stroked-button routerLink="/movie/add">Add Movie</button>
     </ng-container>
-  </h2>
-  <!-- </div> -->
+  </div>
+
+  <br />
 
   <table mat-table [dataSource]="movies" class="full-width">
     <ng-container matColumnDef="name">
@@ -34,8 +33,8 @@
       <td mat-cell *matCellDef="let element">{{ element.director }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="operation" *ngIf="credService.adminControl()">
-      <th mat-header-cell *matHeaderCellDef>Operation</th>
+    <ng-container matColumnDef="admin" *ngIf="credService.adminControl()">
+      <th mat-header-cell *matHeaderCellDef>Admin Control</th>
       <td mat-cell *matCellDef="let element">
         <div class="d-flex">
           <button

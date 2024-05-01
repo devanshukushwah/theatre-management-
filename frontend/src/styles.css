@@ -28,11 +28,11 @@ body {
   display: flex;
 }
 
-.justify-sb {
+.justify-content-sb {
   justify-content: space-between;
 }
 
-.align-item-c {
+.align-items-c {
   align-items: center;
 }
 
@@ -65,4 +65,12 @@ body {
 .top-right {
   grid-column: 3; /* Place in third column */
   grid-row: 1; /* Place in first row */
+}
+
+.m-0-ni {
+  margin: 0 !important;
+}
+
+.btn-sm {
+  transform: scale(0.8);
 }

@@ -26,13 +26,7 @@ export class MoviePageComponent implements OnInit {
     public credService: CredentialsService
   ) {
     if (credService.adminControl()) {
-      this.displayedColumns = [
-        'name',
-        'duration',
-        'actors',
-        'director',
-        'operation',
-      ];
+      this.displayedColumns.push('admin');
     }
   }
 
