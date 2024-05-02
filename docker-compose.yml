@@ -50,6 +50,7 @@ services:
     container_name: service-show
     environment:
       DB_HOST_NAME: postgres
+      EUREKA_SERVER_NAME: service-registry
     depends_on:
       - postgres
       - service-registry

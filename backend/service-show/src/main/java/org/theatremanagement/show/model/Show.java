@@ -27,5 +27,5 @@ public class Show {
     private int bookedSeats;
 
     @Column(insertable = false, updatable = false)
-    private boolean userBooked;
+    private Boolean userBooked;
 }
