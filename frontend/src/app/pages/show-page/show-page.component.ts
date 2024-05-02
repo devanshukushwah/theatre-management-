@@ -56,7 +56,7 @@ export class ShowPageComponent implements OnInit {
     if (!show.id) return;
 
     this.showService.deleteShowById(show.id).subscribe((res) => {
-      console.log('show deleted');
+      this.getAllShow();
     });
   }
 
@@ -64,7 +64,6 @@ export class ShowPageComponent implements OnInit {
     if (!show.id) return;
 
     this.showService.bookShowById(show.id).subscribe((res) => {
-      console.log('show booked');
       this.getAllShow();
     });
   }
