@@ -8,6 +8,7 @@ import org.theatremanagement.show.external.service.MovieInterface;
 import org.theatremanagement.show.model.Movie;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
+import org.theatremanagement.show.repository.ShowRepository;
 import org.theatremanagement.show.service.ShowService;
 
 import java.util.Date;
@@ -22,9 +23,12 @@ public class ShowServiceImpl implements ShowService {
     @Autowired
     MovieInterface movieInterface;
 
+    @Autowired
+    ShowRepository showRepository;
+
     @Override
     public List<Show> getAllShow() {
-        return showDAO.getAllShow();
+        return this.showRepository.findAllShowsByUserId(1);
     }
 
     @Override

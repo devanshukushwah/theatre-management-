@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.theatremanagement.show.constant.ApplicationConstant;
 import org.theatremanagement.show.constant.ApplicationMessage;
+import org.theatremanagement.show.exception.ShowAlreadyBookedException;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
+import org.theatremanagement.show.service.BookShowService;
 import org.theatremanagement.show.service.ShowService;
 
 import java.util.List;
@@ -17,6 +19,9 @@ public class ShowController extends BaseController {
 
     @Autowired
     ShowService showService;
+
+    @Autowired
+    BookShowService bookShowService;
 
     @GetMapping
     ResponseEntity<CustomResponse> getAllShow(){
@@ -42,7 +47,7 @@ public class ShowController extends BaseController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<CustomResponse> deleteShow(@PathVariable long id, @RequestBody Show show) {
+    ResponseEntity<CustomResponse> deleteShow(@PathVariable long id) {
         boolean deleteShow = showService.deleteShow(id);
         if (deleteShow) {
             return getResponseEntityOK(true, ApplicationMessage.SHOW_DELETED_SUCCESSFULLY.getMessage());
@@ -51,4 +56,13 @@ public class ShowController extends BaseController {
         }
     }
 
+    @PostMapping("/book/{showId}")
+    ResponseEntity<CustomResponse> bookShow(@PathVariable("showId") long showId) throws ShowAlreadyBookedException {
+        boolean bookShow = bookShowService.bookShow(showId, 1);
+        if (bookShow) {
+            return getResponseEntityOK(true, ApplicationMessage.SHOW_SUCCESSFULLY_BOOKED.getMessage());
+        } else {
+            return getResponseEntityFailed(false, ApplicationMessage.UNABLE_TO_BOOK_SHOW.getMessage());
+        }
+    }
 }
