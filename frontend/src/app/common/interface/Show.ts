@@ -7,5 +7,5 @@ export interface Show {
   movieName: string | null | undefined;
   totalSeats: number;
   bookedSeats: number;
-  isBooked?: boolean;
+  userBooked?: boolean;
 }

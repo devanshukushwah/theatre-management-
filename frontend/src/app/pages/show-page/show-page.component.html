@@ -54,10 +54,10 @@
         <button
           mat-flat-button
           color="primary"
-          [disabled]="element.isBooked"
+          [disabled]="element.userBooked"
           (click)="handleBookShow(element)"
         >
-          {{ element.isBooked === true ? "Booked" : "Book now" }}
+          {{ element.userBooked === true ? "Booked" : "Book now" }}
         </button>
       </td>
     </ng-container>

@@ -32,4 +32,8 @@ export class ShowService {
   deleteShowById(id: number): Observable<any> {
     return this.http.delete(this.httpUrlsService.deleteShowById(id));
   }
+
+  bookShowById(id: number): Observable<any> {
+    return this.http.post(this.httpUrlsService.bookShowById(id), null);
+  }
 }

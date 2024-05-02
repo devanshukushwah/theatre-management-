@@ -70,4 +70,8 @@ export class HttpUrlsService {
   getMovieName() {
     return `${this.baseUrl}/${this.movieMicroService}/api/v1/movies/get-movies-name`;
   }
+
+  bookShowById(id: number) {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/book/${id}`;
+  }
 }

@@ -59,5 +59,13 @@ export class ShowPageComponent implements OnInit {
       console.log('show deleted');
     });
   }
-  handleBookShow(show: Show): void {}
+
+  handleBookShow(show: Show): void {
+    if (!show.id) return;
+
+    this.showService.bookShowById(show.id).subscribe((res) => {
+      console.log('show booked');
+      this.getAllShow();
+    });
+  }
 }
