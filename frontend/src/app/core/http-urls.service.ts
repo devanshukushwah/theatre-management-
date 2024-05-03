@@ -12,11 +12,11 @@ export class HttpUrlsService {
   constructor() {}
 
   createUser(): string {
-    return `${this.baseUrl}/${this.userMicroService}/rest/v1/auth/create-user`;
+    return `${this.baseUrl}/${this.userMicroService}/api/v1/auth/create-user`;
   }
 
   generateToken(): string {
-    return `${this.baseUrl}/${this.userMicroService}/rest/v1/auth/generate-token`;
+    return `${this.baseUrl}/${this.userMicroService}/api/v1/auth/generate-token`;
   }
 
   updateUserProfile(): string {
