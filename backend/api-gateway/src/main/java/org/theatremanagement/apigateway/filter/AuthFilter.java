@@ -20,39 +20,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     @Autowired
     private RouteValidator routeValidator;
-//
-//    public AuthFilter() {
-//        super(Config.class);
-//    }
-//
-//    @Override
-//    public GatewayFilter apply(Config config) {
-//        return ((exchange, chain) ->{
-//
-//            ServerHttpRequest request = exchange.getRequest();
-//
-//            if(routeValidator.isSecured.test(request)) {
-//                // check for header
-//                if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-//                    throw new RuntimeException("header is missing");
-//                }
-//                String authHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).getFirst();
-//                if(authHeader != null && authHeader.startsWith("Bearer ")) {
-//                    String token = authHeader.substring(7);
-//
-//                    try {
-//                        // it will throw exception if invalid
-//                        JwtUtil.validateToken(token);
-//                    } catch (Exception ex) {
-//                        throw new RuntimeException("Unable to validate token");
-//                    }
-//
-//                }
-//            }
-//
-//            return chain.filter(exchange);
-//        });
-//    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -72,15 +39,19 @@ public class AuthFilter implements GlobalFilter, Ordered {
                 try {
                     // it will throw exception if invalid
                     JwtUtil.validateToken(token);
+
+                    request = exchange.getRequest().mutate()
+                            .header("x-app-userId", JwtUtil.extractClaimKey(token, "userId"))
+                            .header("x-app-role", JwtUtil.extractClaimKey(token, "role"))
+                            .build();
                 } catch (Exception ex) {
-//                    return Mono.error(new Exception("Unable to validate token"));
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
                 }
             }
         }
 
-        return chain.filter(exchange);
+        return chain.filter(exchange.mutate().request(request).build());
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.theatremanagement.user.service.JwtService;
 import org.theatremanagement.user.service.UserService;
 
 @RestController
-@RequestMapping("/rest/v1/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
 

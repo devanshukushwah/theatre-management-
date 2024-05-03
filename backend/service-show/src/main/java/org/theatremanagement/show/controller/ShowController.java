@@ -24,8 +24,8 @@ public class ShowController extends BaseController {
     BookShowService bookShowService;
 
     @GetMapping
-    ResponseEntity<CustomResponse> getAllShow(){
-        return getResponseEntityOK(showService.getAllShow());
+    ResponseEntity<CustomResponse> getAllShow(@RequestHeader(value = "x-app-userId", required = false, defaultValue = "-1") Long userId){
+        return getResponseEntityOK(showService.getAllShow(userId));
     }
 
     @GetMapping("{id}")

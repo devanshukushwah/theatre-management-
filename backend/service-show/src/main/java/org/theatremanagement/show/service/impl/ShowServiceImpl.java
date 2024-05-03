@@ -27,8 +27,8 @@ public class ShowServiceImpl implements ShowService {
     ShowRepository showRepository;
 
     @Override
-    public List<Show> getAllShow() {
-        return this.showRepository.findAllShowsByUserId(1);
+    public List<Show> getAllShow(Long id) {
+        return this.showRepository.findAllShowsByUserId(id);
     }
 
     @Override

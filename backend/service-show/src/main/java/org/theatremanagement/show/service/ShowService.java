@@ -5,7 +5,7 @@ import org.theatremanagement.show.model.Show;
 import java.util.List;
 
 public interface ShowService {
-    public List<Show> getAllShow();
+    public List<Show> getAllShow(Long userId);
 
     public Show getShow(Long id);
 

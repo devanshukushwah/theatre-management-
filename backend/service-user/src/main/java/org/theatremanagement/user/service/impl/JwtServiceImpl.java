@@ -46,11 +46,19 @@ public class JwtServiceImpl implements JwtService {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmailAddress(), user.getPassword()));
 
         if(authenticate.isAuthenticated()) {
-            Map<String, Object> claims = new HashMap<>();
+            User dbUser = (User)authenticate.getPrincipal();
+            Map<String, Object> claims = getClaimUserDetails(dbUser);
             return createToken(claims, user.getEmailAddress());
         } else {
             throw new RuntimeException("Invalid user credentials");
         }
+    }
+
+    private Map<String, Object> getClaimUserDetails(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("role", user.getRole());
+        return claims;
     }
 
     private String createToken(Map<String, Object> claims, String userName) {
