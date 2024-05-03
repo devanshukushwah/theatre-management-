@@ -57,8 +57,8 @@ public class ShowController extends BaseController {
     }
 
     @PostMapping("/book/{showId}")
-    ResponseEntity<CustomResponse> bookShow(@PathVariable("showId") long showId) throws ShowAlreadyBookedException {
-        boolean bookShow = bookShowService.bookShow(showId, 1);
+    ResponseEntity<CustomResponse> bookShow(@PathVariable("showId") long showId, @RequestHeader(value = "x-app-userId") Long userId) throws ShowAlreadyBookedException {
+        boolean bookShow = bookShowService.bookShow(showId, userId);
         if (bookShow) {
             return getResponseEntityOK(true, ApplicationMessage.SHOW_SUCCESSFULLY_BOOKED.getMessage());
         } else {
