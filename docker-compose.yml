@@ -1,16 +1,23 @@
 version: '3.8'
 
-services:
+# common env variables which are shared between microservices.
+x-environment: &common-svc-env-variables
+  DB_HOST_NAME: postgres
+  EUREKA_SERVER_NAME: service-registry
 
+# postgres database user and password.
+x-db-environment: &db-cred
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: rootpassword
+
+services:
   # PostgresSQL Database
   postgres:
     image: postgres:16.2
     container_name: postgres
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: rootpassword
+    environment: *db-cred
     volumes:
       - /f/db-data/postgresql/16/data:/var/lib/postgresql/data
     restart: always
@@ -21,8 +28,7 @@ services:
   service-user:
     image: devanshukushwah/theatre-management-service-user:0.0.1-SNAPSHOT
     container_name: service-user
-    environment:
-      DB_HOST_NAME: postgres
+    environment: *common-svc-env-variables
     depends_on:
       - postgres
       - service-registry
@@ -34,8 +40,7 @@ services:
   service-movie:
     image: devanshukushwah/theatre-management-service-movie:0.0.1-SNAPSHOT
     container_name: service-movie
-    environment:
-      DB_HOST_NAME: postgres
+    environment: *common-svc-env-variables
     depends_on:
       - postgres
       - service-registry
@@ -48,9 +53,7 @@ services:
   service-show:
     image: devanshukushwah/theatre-management-service-show:0.0.1-SNAPSHOT
     container_name: service-show
-    environment:
-      DB_HOST_NAME: postgres
-      EUREKA_SERVER_NAME: service-registry
+    environment: *common-svc-env-variables
     depends_on:
       - postgres
       - service-registry
@@ -72,6 +75,7 @@ services:
   api-gateway:
     image: devanshukushwah/theatre-management-api-gateway:0.0.1-SNAPSHOT
     container_name: api-gateway
+    environment: *common-svc-env-variables
     ports:
       - "5000:5000"
     depends_on:
@@ -84,3 +88,4 @@ services:
 # separate network for theatre management application.
 networks:
   theatre-management-network:
+
