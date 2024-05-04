@@ -43,6 +43,7 @@ import { MatTableModule } from '@angular/material/table';
 import { SearchMovieDialogComponent } from './components/search-movie-dialog/search-movie-dialog.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { GenericTableComponent } from './components/generic-table/generic-table.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { MatListModule } from '@angular/material/list';
     ShowComponent,
     EditProfileDialogComponent,
     SearchMovieDialogComponent,
+    GenericTableComponent,
   ],
   imports: [
     BrowserModule,
