@@ -7,284 +7,41 @@
     </ng-container>
   </div>
   <br />
-
-  <table mat-table [dataSource]="shows" class="full-width">
-    <ng-container matColumnDef="movieName">
-      <th mat-header-cell *matHeaderCellDef>Movie Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.movieName }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef>Duration</th>
-      <td mat-cell *matCellDef="let element">
-        {{
-          dateUtil.getTimeDifferenceInMinutes(
-            element.startTime,
-            element.endTime
-          )
-        }}
-        min
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef>Start</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.startTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef>End</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.endTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="seats">
-      <th mat-header-cell *matHeaderCellDef>Seats</th>
-      <td mat-cell *matCellDef="let element">
-        {{ getSeatInfo(element) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="book">
-      <th mat-header-cell *matHeaderCellDef>Book Status</th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          mat-flat-button
-          color="primary"
-          [disabled]="element.userBooked"
-          (click)="handleBookShow(element)"
-        >
-          {{ element.userBooked === true ? "Booked" : "Book now" }}
-        </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="admin" *ngIf="credService.adminControl()">
-      <th mat-header-cell *matHeaderCellDef>Admin Control</th>
-      <td mat-cell *matCellDef="let element">
-        <div class="d-flex align-items-c">
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="'/show/edit/' + element.id"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="handleDeleteShow(element)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-    <tr class="mat-row" *matNoDataRow>
-      <td
-        class="mat-cell"
-        [attr.colspan]="displayedColumns.length"
-        class="text-align-c"
-      >
-        No shows found
-      </td>
-    </tr>
-  </table>
+  <app-generic-table
+    [config]="showTableConfig"
+    [dataSource]="shows"
+    noRecordFoundLabel="There is no upcoming show"
+    [adminControl]="true"
+    [bookButton]="true"
+    (handleDeleteShowEvent)="handleDeleteShow($event)"
+    (handleBookShowEvent)="handleBookShow($event)"
+    [readonly]="false"
+  ></app-generic-table>
 
   <br />
   <h2>In-Progress Shows</h2>
 
-  <table mat-table [dataSource]="inProgressShows" class="full-width">
-    <ng-container matColumnDef="movieName">
-      <th mat-header-cell *matHeaderCellDef>Movie Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.movieName }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef>Duration</th>
-      <td mat-cell *matCellDef="let element">
-        {{
-          dateUtil.getTimeDifferenceInMinutes(
-            element.startTime,
-            element.endTime
-          )
-        }}
-        min
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef>Start</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.startTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef>End</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.endTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="seats">
-      <th mat-header-cell *matHeaderCellDef>Seats</th>
-      <td mat-cell *matCellDef="let element">
-        {{ getSeatInfo(element) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="book">
-      <th mat-header-cell *matHeaderCellDef>Book Status</th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="handleBookShow(element)"
-          disabled
-        >
-          {{ element.userBooked === true ? "Booked" : "Book now" }}
-        </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="admin" *ngIf="credService.adminControl()">
-      <th mat-header-cell *matHeaderCellDef>Admin Control</th>
-      <td mat-cell *matCellDef="let element">
-        <div class="d-flex align-items-c">
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="'/show/edit/' + element.id"
-            disabled
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="handleDeleteShow(element)"
-            disabled
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-    <tr class="mat-row" *matNoDataRow>
-      <td
-        class="mat-cell"
-        [attr.colspan]="displayedColumns.length"
-        class="text-align-c"
-      >
-        No shows found
-      </td>
-    </tr>
-  </table>
-
+  <app-generic-table
+    [config]="showTableConfig"
+    [dataSource]="inProgressShows"
+    noRecordFoundLabel="Show not started"
+    [adminControl]="true"
+    [bookButton]="true"
+    (handleDeleteShowEvent)="handleDeleteShow($event)"
+    (handleBookShowEvent)="handleBookShow($event)"
+    [readonly]="true"
+  ></app-generic-table>
   <br />
   <h2>Past Shows</h2>
 
-  <table mat-table [dataSource]="pastShows" class="full-width">
-    <ng-container matColumnDef="movieName">
-      <th mat-header-cell *matHeaderCellDef>Movie Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.movieName }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef>Duration</th>
-      <td mat-cell *matCellDef="let element">
-        {{
-          dateUtil.getTimeDifferenceInMinutes(
-            element.startTime,
-            element.endTime
-          )
-        }}
-        min
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef>Start</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.startTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef>End</th>
-      <td mat-cell *matCellDef="let element">
-        {{ dateUtil.getDateAndTime(element.endTime) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="seats">
-      <th mat-header-cell *matHeaderCellDef>Seats</th>
-      <td mat-cell *matCellDef="let element">
-        {{ getSeatInfo(element) }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="book">
-      <th mat-header-cell *matHeaderCellDef>Book Status</th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="handleBookShow(element)"
-          disabled
-        >
-          {{ element.userBooked === true ? "Booked" : "Book now" }}
-        </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="admin" *ngIf="credService.adminControl()">
-      <th mat-header-cell *matHeaderCellDef>Admin Control</th>
-      <td mat-cell *matCellDef="let element">
-        <div class="d-flex align-items-c">
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="'/show/edit/' + element.id"
-            disabled
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="handleDeleteShow(element)"
-            disabled
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-    <tr class="mat-row" *matNoDataRow>
-      <td
-        class="mat-cell"
-        [attr.colspan]="displayedColumns.length"
-        class="text-align-c"
-      >
-        No shows found
-      </td>
-    </tr>
-  </table>
+  <app-generic-table
+    [config]="showTableConfig"
+    [dataSource]="pastShows"
+    noRecordFoundLabel="Show not started"
+    [adminControl]="true"
+    [bookButton]="true"
+    (handleDeleteShowEvent)="handleDeleteShow($event)"
+    (handleBookShowEvent)="handleBookShow($event)"
+    [readonly]="true"
+  ></app-generic-table>
 </div>

@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { GenericTable } from 'src/app/common/interface/GenericTable';
 import { Show } from 'src/app/common/interface/Show';
 import { DateUtilsService } from 'src/app/common/utility/date-utils.service';
 import { CredentialsService } from 'src/app/services/credentials.service';
@@ -11,9 +12,42 @@ import { ShowService } from 'src/app/services/show.service';
   styleUrls: ['./show-page.component.css'],
 })
 export class ShowPageComponent implements OnInit {
-  shows: Show[] = [];
+  shows: any[] = [];
   pastShows: Show[] = [];
   inProgressShows: Show[] = [];
+
+  showTableConfig: GenericTable[] = [
+    {
+      name: 'Movie Name',
+      ref: 'movieName',
+      order: 1,
+      width: '1f',
+    },
+    {
+      name: 'Duration',
+      ref: 'duration',
+      order: 2,
+      width: '10%',
+    },
+    {
+      name: 'Start Time',
+      ref: 'startTime',
+      order: 3,
+      width: '20%',
+    },
+    {
+      name: 'End Time',
+      ref: 'endTime',
+      order: 4,
+      width: '20%',
+    },
+    {
+      name: 'Seats',
+      ref: 'seatInfo',
+      order: 5,
+      width: '5%',
+    },
+  ];
 
   displayedColumns: string[] = [
     'movieName',
@@ -40,6 +74,22 @@ export class ShowPageComponent implements OnInit {
     this.getInProgressShow();
   }
 
+  formShowTableData(show: Show[]): any[] {
+    return show.map((item) => {
+      return {
+        ...item,
+        startTime: this.dateUtil.getDateAndTime(item.startTime),
+        endTime: this.dateUtil.getDateAndTime(item.endTime),
+        duration:
+          this.dateUtil.getTimeDifferenceInMinutes(
+            item.endTime,
+            item.startTime
+          ) + ' min',
+        seatInfo: this.getSeatInfo(item),
+      };
+    });
+  }
+
   getAllShow(): void {
     const params: HttpParams = new HttpParams().set(
       'show-status',
@@ -47,7 +97,7 @@ export class ShowPageComponent implements OnInit {
     );
     this.showService.getAllFilterShow(params).subscribe((res) => {
       if (res?.data) {
-        this.shows = res.data;
+        this.shows = this.formShowTableData(res.data);
       }
     });
   }
@@ -56,7 +106,7 @@ export class ShowPageComponent implements OnInit {
     const params: HttpParams = new HttpParams().set('show-status', 'completed');
     this.showService.getAllFilterShow(params).subscribe((res) => {
       if (res?.data) {
-        this.pastShows = res.data;
+        this.pastShows = this.formShowTableData(res.data);
       }
     });
   }
@@ -68,7 +118,7 @@ export class ShowPageComponent implements OnInit {
     );
     this.showService.getAllFilterShow(params).subscribe((res) => {
       if (res?.data) {
-        this.inProgressShows = res.data;
+        this.inProgressShows = this.formShowTableData(res.data);
       }
     });
   }

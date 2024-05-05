@@ -18,10 +18,53 @@
     <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  <ng-container matColumnDef="book" *ngIf="bookButton">
+    <th mat-header-cell *matHeaderCellDef style="width: 10%">Book Status</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="element.userBooked || readonly"
+        (click)="handleBookShow(element)"
+      >
+        {{ element.userBooked === true ? "Booked" : "Book now" }}
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="admin" *ngIf="adminControl">
+    <th mat-header-cell *matHeaderCellDef style="width: 10%">Admin Control</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="d-flex align-items-c">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="'/show/edit/' + element.id"
+          [disabled]="readonly"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="handleDeleteShow(element)"
+          [disabled]="readonly"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnDefination"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnDefination"></tr>
+
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" [attr.colspan]="columns.length" class="text-align-c">
+    <td
+      class="mat-cell"
+      [attr.colspan]="columnDefination.length"
+      class="text-align-c"
+    >
       {{ noRecordFoundLabel }}
     </td>
   </tr>
