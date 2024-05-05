@@ -74,4 +74,8 @@ export class HttpUrlsService {
   bookShowById(id: number) {
     return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/book/${id}`;
   }
+
+  getAllFilterShow(): string {
+    return `${this.baseUrl}/${this.showMicroService}/api/v1/shows/filters`;
+  }
 }

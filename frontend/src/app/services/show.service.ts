@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpUrlsService } from '../core/http-urls.service';
 import { Observable } from 'rxjs';
@@ -35,5 +35,9 @@ export class ShowService {
 
   bookShowById(id: number): Observable<any> {
     return this.http.post(this.httpUrlsService.bookShowById(id), null);
+  }
+
+  getAllFilterShow(params: HttpParams): Observable<any> {
+    return this.http.get(this.httpUrlsService.getAllFilterShow(), { params });
   }
 }
