@@ -57,13 +57,13 @@
                         and s.end_time &lt; CAST('${value}' AS TIMESTAMP)
                     </if>
                     <if test="key == 'show-status' and value == 'in-progress'">
-                        s.start_time &lt;= current_timestamp and s.end_time &gt;= current_timestamp
+                        and s.start_time &lt;= current_timestamp and s.end_time &gt;= current_timestamp
                     </if>
                     <if test="key == 'show-status' and value == 'not-started'">
-                        s.start_time &gt; current_timestamp
+                        and s.start_time &gt; current_timestamp
                     </if>
                     <if test="key == 'show-status' and value == 'completed'">
-                        s.end_time &lt; current_timestamp
+                        and s.end_time &lt; current_timestamp
                     </if>
                 </foreach>
             </if>
