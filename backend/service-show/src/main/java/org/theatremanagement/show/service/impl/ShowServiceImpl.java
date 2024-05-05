@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.theatremanagement.show.DAO.ShowDAO;
 import org.theatremanagement.show.external.service.MovieInterface;
+import org.theatremanagement.show.mapper.ShowMapper;
 import org.theatremanagement.show.model.Movie;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
@@ -13,6 +14,7 @@ import org.theatremanagement.show.service.ShowService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -26,9 +28,17 @@ public class ShowServiceImpl implements ShowService {
     @Autowired
     ShowRepository showRepository;
 
+    @Autowired
+    ShowMapper showMapper;
+
     @Override
     public List<Show> getAllShow(Long id) {
         return this.showRepository.findAllShowsByUserId(id);
+    }
+
+    @Override
+    public List<Show> getAllFilterShow(Long userId, Map<String, Object> params) {
+        return this.showMapper.getAllShows(userId, params);
     }
 
     @Override

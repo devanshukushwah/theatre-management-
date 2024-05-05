@@ -12,6 +12,7 @@ import org.theatremanagement.show.service.BookShowService;
 import org.theatremanagement.show.service.ShowService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/shows")
@@ -26,6 +27,12 @@ public class ShowController extends BaseController {
     @GetMapping
     ResponseEntity<CustomResponse> getAllShow(@RequestHeader(value = "x-app-userId", required = false, defaultValue = "-1") Long userId){
         return getResponseEntityOK(showService.getAllShow(userId));
+    }
+
+    @GetMapping("/filters")
+    ResponseEntity<CustomResponse> getAllFilterShow(@RequestHeader(value = "x-app-userId", required = false, defaultValue = "-1") Long userId,
+                                                    @RequestParam Map<String, Object> params){
+        return getResponseEntityOK(showService.getAllFilterShow(userId, params));
     }
 
     @GetMapping("{id}")
