@@ -1,5 +1,5 @@
 # Use a JDK 21 base image
-FROM openjdk:21
+FROM openjdk:21-slim
 
 # Copy the Spring Boot JAR file into the container
 COPY target/*.jar app.jar
