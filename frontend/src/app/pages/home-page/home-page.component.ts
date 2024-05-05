@@ -16,21 +16,25 @@ export class HomePageComponent implements OnInit {
       name: 'Movie Name',
       ref: 'movieName',
       order: 1,
+      width: '1f',
     },
     {
       name: 'Duration',
       ref: 'duration',
       order: 2,
+      width: '10%',
     },
     {
       name: 'Start Time',
       ref: 'startTime',
       order: 3,
+      width: '20%',
     },
     {
       name: 'End Time',
       ref: 'endTime',
       order: 4,
+      width: '20%',
     },
   ];
 

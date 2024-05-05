@@ -8,7 +8,13 @@
 >
   <!-- Define your table columns here -->
   <ng-container *ngFor="let column of columns" [matColumnDef]="column">
-    <th mat-header-cell *matHeaderCellDef>{{ headerConfig[column] }}</th>
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      [style.width]="headerWidthConfig[column]"
+    >
+      {{ headerConfig[column] }}
+    </th>
     <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
   </ng-container>
 

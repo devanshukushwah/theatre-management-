@@ -10,6 +10,7 @@ export class GenericTableComponent implements OnInit {
   @Input() dataSource: any[] = [];
   columns: string[] = [];
   headerConfig: any = {};
+  headerWidthConfig: any = {};
   @Input() config: GenericTable[] = [];
 
   @Input() noRecordFoundLabel: string = 'No records found';
@@ -25,6 +26,7 @@ export class GenericTableComponent implements OnInit {
     this.columns = this.config.map((item) => item.ref);
     this.config.forEach((item) => {
       this.headerConfig[item.ref] = item.name;
+      if (item?.width) this.headerWidthConfig[item.ref] = item.width;
     });
   }
 }
