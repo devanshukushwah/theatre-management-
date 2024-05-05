@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Show } from 'src/app/common/interface/Show';
 import { DateUtilsService } from 'src/app/common/utility/date-utils.service';
@@ -11,6 +12,8 @@ import { ShowService } from 'src/app/services/show.service';
 })
 export class ShowPageComponent implements OnInit {
   shows: Show[] = [];
+  pastShows: Show[] = [];
+  inProgressShows: Show[] = [];
 
   displayedColumns: string[] = [
     'movieName',
@@ -33,12 +36,39 @@ export class ShowPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllShow();
+    this.getAllPastShow();
+    this.getInProgressShow();
   }
 
   getAllShow(): void {
-    this.showService.getAllShows().subscribe((res) => {
+    const params: HttpParams = new HttpParams().set(
+      'show-status',
+      'not-started'
+    );
+    this.showService.getAllFilterShow(params).subscribe((res) => {
       if (res?.data) {
         this.shows = res.data;
+      }
+    });
+  }
+
+  getAllPastShow(): void {
+    const params: HttpParams = new HttpParams().set('show-status', 'completed');
+    this.showService.getAllFilterShow(params).subscribe((res) => {
+      if (res?.data) {
+        this.pastShows = res.data;
+      }
+    });
+  }
+
+  getInProgressShow(): void {
+    const params: HttpParams = new HttpParams().set(
+      'show-status',
+      'in-progress'
+    );
+    this.showService.getAllFilterShow(params).subscribe((res) => {
+      if (res?.data) {
+        this.inProgressShows = res.data;
       }
     });
   }

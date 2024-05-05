@@ -19,6 +19,7 @@
       name="startTime"
       type="datetime-local"
       [(ngModel)]="show.startTime"
+      [min]="todayDate"
     />
   </mat-form-field>
 
@@ -30,7 +31,6 @@
       name="totalSeats"
       type="number"
       [(ngModel)]="show.totalSeats"
-      min="1"
     />
   </mat-form-field>
 

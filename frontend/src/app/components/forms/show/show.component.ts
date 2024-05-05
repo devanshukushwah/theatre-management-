@@ -16,6 +16,8 @@ export class ShowComponent implements OnInit {
   @Input() buttonLabel: string = 'Submit';
   movieDropdownValues: Movie[] = [];
   isMovieInputDropdown: boolean = false;
+  todayDate: string = new Date().toISOString().substring(0, 16);
+
   constructor(private movieService: MovieService, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
