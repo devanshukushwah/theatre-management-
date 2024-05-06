@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpUrlsService } from '../core/http-urls.service';
 import { Observable } from 'rxjs';
 import { Show } from '../common/interface/Show';
+import { DateUtilsService } from '../common/utility/date-utils.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ import { Show } from '../common/interface/Show';
 export class ShowService {
   constructor(
     private http: HttpClient,
-    private httpUrlsService: HttpUrlsService
+    private httpUrlsService: HttpUrlsService,
+    private dateUtil: DateUtilsService
   ) {}
 
   getAllShows(): Observable<any> {
@@ -18,11 +20,19 @@ export class ShowService {
   }
 
   updateShow(id: number, show: Show): Observable<any> {
-    return this.http.put(this.httpUrlsService.updateShow(id), show);
+    const payloadShow = {
+      ...show,
+      startTime: this.dateUtil.dateInterceptor(show.startTime),
+    };
+    return this.http.put(this.httpUrlsService.updateShow(id), payloadShow);
   }
 
   addShow(show: Show): Observable<any> {
-    return this.http.post(this.httpUrlsService.addShow(), show);
+    const payloadShow = {
+      ...show,
+      startTime: this.dateUtil.dateInterceptor(show.startTime),
+    };
+    return this.http.post(this.httpUrlsService.addShow(), payloadShow);
   }
 
   getShowById(id: string): Observable<any> {

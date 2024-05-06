@@ -1,10 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DateUtilsService {
-  constructor() {}
+  constructor(private datePipe: DatePipe) {}
 
   getTimeString(timeInMinutes: any) {
     const hours: number = Math.floor(timeInMinutes / 60);
@@ -13,18 +14,10 @@ export class DateUtilsService {
   }
 
   getDateAndTime(dateAndTime: any) {
-    const currentDate = new Date(dateAndTime);
-    const date = currentDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-    });
-    const time = currentDate.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
-    return `${date} ${time}`;
+    const date = new Date(dateAndTime).toLocaleString();
+
+    // removed milliseconds
+    return date.replace(':00 ', ' ');
   }
 
   getTimeDifferenceInMinutes(date1: any, date2: any): string {
@@ -42,5 +35,9 @@ export class DateUtilsService {
     } catch (error) {
       return '';
     }
+  }
+
+  dateInterceptor(date: any): any {
+    return new Date(date).toISOString();
   }
 }
