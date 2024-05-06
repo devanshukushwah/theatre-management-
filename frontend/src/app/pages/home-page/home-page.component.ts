@@ -39,6 +39,7 @@ export class HomePageComponent implements OnInit {
   ];
 
   bookedShow: any[] = [];
+  bookedStartedShow: any[] = [];
   watchedShow: any[] = [];
 
   constructor(
@@ -49,6 +50,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getUpcomingBookedShow();
     this.getWatchedShow();
+    this.getBookedStartedShow();
   }
 
   formShowTableData(show: Show[]): any[] {
@@ -73,6 +75,17 @@ export class HomePageComponent implements OnInit {
     this.showService.getAllFilterShow(params).subscribe((res) => {
       if (res?.data) {
         this.bookedShow = this.formShowTableData(res.data);
+      }
+    });
+  }
+
+  getBookedStartedShow(): void {
+    const params: HttpParams = new HttpParams()
+      .set('booked', true)
+      .set('show-status', 'in-progress');
+    this.showService.getAllFilterShow(params).subscribe((res) => {
+      if (res?.data) {
+        this.bookedStartedShow = this.formShowTableData(res.data);
       }
     });
   }

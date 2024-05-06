@@ -6,6 +6,14 @@
     noRecordFoundLabel="You haven't booked any show"
   ></app-generic-table>
   <br />
+
+  <h2>Started Booked Shows</h2>
+  <app-generic-table
+    [config]="showTableConfig"
+    [dataSource]="bookedStartedShow"
+    noRecordFoundLabel="There is no show started"
+  ></app-generic-table>
+  <br />
   <h2>Watched Shows</h2>
   <app-generic-table
     [config]="showTableConfig"
