@@ -84,6 +84,17 @@ services:
     networks:
       - theatre-management-network
 
+  # API gateway microservice
+  frontend:
+    image: devanshukushwah/theatre-management-frontend:0.0.1-SNAPSHOT
+    container_name: frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - service-registry
+    restart: always
+    networks:
+      - theatre-management-network
 
 # separate network for theatre management application.
 networks:
