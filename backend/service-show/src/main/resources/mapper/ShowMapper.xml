@@ -14,7 +14,12 @@
 
     <select id="getAllShows" parameterType="java.util.Map" resultMap="getAllShowsResultMap">
         select s.id, s.start_time , s.end_time , s.total_seats , s.booked_seats, s.movie_id , s.movie_name,
-        case when bs.id is not null then true else false end as userBooked
+        case
+            when (bs.id is not null) then 'Booked'
+            when (s.total_seats > s.booked_seats) then 'Not Booked'
+            when (s.total_seats = booked_seats) then 'Sold Out'
+            else 'Status Unknown'
+        end as bookStatus
         from shows s
         left join book_shows bs on s.id = bs.show_id and bs.user_id = #{userId}
         <where>
