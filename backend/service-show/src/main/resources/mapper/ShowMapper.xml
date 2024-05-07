@@ -17,7 +17,7 @@
         case
             when (bs.id is not null) then 'Booked'
             when (s.total_seats &gt; s.booked_seats) then 'Available'
-            when (s.total_seats &lt; booked_seats) then 'Sold Out'
+            when (s.total_seats &lt;= booked_seats) then 'Sold Out'
             else 'Status Unknown'
         end as status
         from shows s
