@@ -24,10 +24,10 @@
       <button
         mat-flat-button
         color="primary"
-        [disabled]="element.userBooked || readonly"
+        [disabled]="element.status !== 'Available' || readonly"
         (click)="handleBookShow(element)"
       >
-        {{ element.userBooked === true ? "Booked" : "Book now" }}
+        {{ element.status === "Available" ? "Book Now" : element.status }}
       </button>
     </td>
   </ng-container>
