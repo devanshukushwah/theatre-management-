@@ -16,10 +16,10 @@
         select s.id, s.start_time , s.end_time , s.total_seats , s.booked_seats, s.movie_id , s.movie_name,
         case
             when (bs.id is not null) then 'Booked'
-            when (s.total_seats > s.booked_seats) then 'Not Booked'
-            when (s.total_seats = booked_seats) then 'Sold Out'
+            when (s.total_seats &gt; s.booked_seats) then 'Available'
+            when (s.total_seats &lt; booked_seats) then 'Sold Out'
             else 'Status Unknown'
-        end as bookStatus
+        end as status
         from shows s
         left join book_shows bs on s.id = bs.show_id and bs.user_id = #{userId}
         <where>
@@ -73,5 +73,6 @@
                 </foreach>
             </if>
         </where>
+        order by s.id desc
     </select>
 </mapper>
