@@ -1,15 +1,13 @@
 package org.theatremanagement.show.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang.time.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.theatremanagement.show.DAO.ShowDAO;
 import org.theatremanagement.show.external.service.MovieInterface;
 import org.theatremanagement.show.mapper.ShowMapper;
 import org.theatremanagement.show.model.Movie;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
-import org.theatremanagement.show.repository.ShowRepository;
 import org.theatremanagement.show.service.ShowService;
 
 import java.util.Date;
@@ -17,24 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class ShowServiceImpl implements ShowService {
 
-    @Autowired
-    ShowDAO showDAO;
+    final MovieInterface movieInterface;
 
-    @Autowired
-    MovieInterface movieInterface;
-
-    @Autowired
-    ShowRepository showRepository;
-
-    @Autowired
-    ShowMapper showMapper;
-
-    @Override
-    public List<Show> getAllShow(Long id) {
-        return this.showRepository.findAllShowsByUserId(id);
-    }
+    final ShowMapper showMapper;
 
     @Override
     public List<Show> getAllFilterShow(Long userId, Map<String, Object> params) {
@@ -43,7 +29,7 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public Show getShow(Long id) {
-        return showDAO.getShowById(id);
+        return this.showMapper.getShowById(id);
     }
 
     /**
@@ -70,15 +56,14 @@ public class ShowServiceImpl implements ShowService {
             onlyAttributeShow.setBookedSeats(show.getBookedSeats());
             onlyAttributeShow.setMovieId(show.getMovieId());
             processShowForMovie(onlyAttributeShow, movie);
-            Show save = showDAO.save(onlyAttributeShow);
-            return save.getId() > 0L;
+            return this.showMapper.create(onlyAttributeShow) > 0;
         }
         return false;
     }
 
     @Override
-    public Show updateShow(long id, Show show) {
-        Show existingShow = showDAO.getShowById(id);
+    public boolean updateShow(long id, Show show) {
+        Show existingShow = this.showMapper.getShowById(id);
         CustomResponse<Movie> movieResponse = movieInterface.getMovie(show.getMovieId()).getBody();
         Movie movie =  movieResponse.getData();
         if(existingShow != null && movie != null) {
@@ -87,14 +72,13 @@ public class ShowServiceImpl implements ShowService {
             existingShow.setBookedSeats(show.getBookedSeats());
             existingShow.setMovieId(show.getMovieId());
             processShowForMovie(existingShow, movie);
-            return showDAO.save(existingShow);
+            return this.showMapper.update(existingShow) > 0;
         }
-        return null;
+        return false;
     }
 
     @Override
     public boolean deleteShow(Long id) {
-        this.showDAO.deleteShowById(id);
-        return this.showDAO.getShowById(id) == null;
+        return this.showMapper.deleteShowById(id) > 0;
     }
 }

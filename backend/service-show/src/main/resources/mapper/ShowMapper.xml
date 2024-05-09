@@ -10,18 +10,20 @@
         <result column="end_time" property="endTime" />
         <result column="movie_id" property="movieId" />
         <result column="movie_name" property="movieName" />
+        <result column="status" property="status" />
     </resultMap>
 
     <select id="getAllShows" parameterType="java.util.Map" resultMap="getAllShowsResultMap">
         select s.id, s.start_time , s.end_time , s.total_seats , s.booked_seats, s.movie_id , s.movie_name,
         case
             when (bs.id is not null) then 'Booked'
+            when (s.end_time &lt; current_timestamp at time zone 'utc') then 'Ended'
             when (s.total_seats &gt; s.booked_seats) then 'Available'
             when (s.total_seats &lt;= booked_seats) then 'Sold Out'
             else 'Status Unknown'
         end as status
-        from shows s
-        left join book_shows bs on s.id = bs.show_id and bs.user_id = #{userId}
+        from show s
+        left join book_show bs on s.id = bs.show_id and bs.user_id = #{userId}
         <where>
             <if test="params != null and params.size() > 0">
                 <foreach collection="params" index="key" item="value">
@@ -75,4 +77,28 @@
         </where>
         order by s.id desc
     </select>
+
+    <select id="getShowById" parameterType="java.lang.Long" resultType="org.theatremanagement.show.model.Show">
+        SELECT * FROM SHOW WHERE ID = #{id}
+    </select>
+
+    <update id="create" parameterType="org.theatremanagement.show.model.Show">
+        insert into SHOW(MOVIE_NAME, MOVIE_ID, start_time, end_time, total_seats, booked_seats)
+        values (#{movieName}, #{movieId}, #{startTime}, #{endTime}, #{totalSeats}, #{bookedSeats})
+    </update>
+
+    <update id="update" parameterType="org.theatremanagement.show.model.Show">
+        update show
+        set movie_name = #{movieName},
+        movie_id = #{movieId},
+        start_time = #{startTime},
+        end_time = #{endTime},
+        total_seats = #{totalSeats},
+        booked_seats = #{bookedSeats}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteShowById" parameterType="java.lang.Long">
+        DELETE FROM SHOW WHERE ID = #{id}
+    </delete>
 </mapper>

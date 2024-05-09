@@ -25,11 +25,6 @@ public class ShowController extends BaseController {
     @Autowired
     BookShowService bookShowService;
 
-    @GetMapping
-    ResponseEntity<CustomResponse> getAllShow(@RequestHeader(value = "x-app-userId", required = false, defaultValue = "-1") Long userId){
-        return getResponseEntityOK(showService.getAllShow(userId));
-    }
-
     @GetMapping("/filters")
     ResponseEntity<CustomResponse> getAllFilterShow(@RequestHeader(value = "x-app-userId", required = false, defaultValue = "-1") Long userId,
                                                     @RequestParam Map<String, Object> params){
@@ -50,7 +45,7 @@ public class ShowController extends BaseController {
 
     @PutMapping("/{id}")
     ResponseEntity<CustomResponse> updateShow(@PathVariable long id, @RequestBody Show show) {
-        Show updatedShow = showService.updateShow(id, show);
+        boolean updatedShow = showService.updateShow(id, show);
         return getResponseEntityOK(updatedShow);
     }
 

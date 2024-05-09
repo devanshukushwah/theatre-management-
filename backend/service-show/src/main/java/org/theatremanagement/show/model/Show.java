@@ -12,12 +12,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="SHOWS")
 public class Show {
 
-    @Id
-    @GeneratedValue
     private long id;
     private Date startTime;
     private Date endTime;
@@ -25,7 +21,5 @@ public class Show {
     private String movieName;
     private int totalSeats;
     private int bookedSeats;
-
-    @Column(insertable = false, updatable = false)
     private String status;
 }
