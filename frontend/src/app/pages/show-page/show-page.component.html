@@ -15,7 +15,6 @@
     [bookButton]="true"
     (handleDeleteShowEvent)="handleDeleteShow($event)"
     (handleBookShowEvent)="handleBookShow($event)"
-    [readonly]="false"
   ></app-generic-table>
 
   <br />
@@ -29,7 +28,6 @@
     [bookButton]="true"
     (handleDeleteShowEvent)="handleDeleteShow($event)"
     (handleBookShowEvent)="handleBookShow($event)"
-    [readonly]="true"
   ></app-generic-table>
   <br />
   <h2>Past Shows</h2>
@@ -42,6 +40,7 @@
     [bookButton]="true"
     (handleDeleteShowEvent)="handleDeleteShow($event)"
     (handleBookShowEvent)="handleBookShow($event)"
-    [readonly]="true"
+    [bookNowDisabled]="true"
+    [adminControlDisabled]="true"
   ></app-generic-table>
 </div>

@@ -16,7 +16,8 @@ export class GenericTableComponent implements OnInit {
   @Input() config: GenericTable[] = [];
   @Input() bookButton: boolean = false;
   @Input() adminControl: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() adminControlDisabled: boolean = false;
+  @Input() bookNowDisabled: boolean = false;
 
   @Input() noRecordFoundLabel: string = 'No records found';
 

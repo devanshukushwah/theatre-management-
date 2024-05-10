@@ -86,6 +86,8 @@ export class ShowPageComponent implements OnInit {
             item.startTime
           ) + ' min',
         seatInfo: this.getSeatInfo(item),
+        status: item.status === 'Available' ? 'Book Now' : item.status,
+        bookNowDisabled: item.status === 'Booked',
       };
     });
   }

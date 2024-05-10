@@ -24,10 +24,10 @@
       <button
         mat-flat-button
         color="primary"
-        [disabled]="element.status !== 'Available' || readonly"
+        [disabled]="bookNowDisabled || element.bookNowDisabled"
         (click)="handleBookShow(element)"
       >
-        {{ element.status === "Available" ? "Book Now" : element.status }}
+        {{ element.status }}
       </button>
     </td>
   </ng-container>
@@ -40,7 +40,7 @@
           mat-icon-button
           color="primary"
           [routerLink]="'/show/edit/' + element.id"
-          [disabled]="readonly"
+          [disabled]="adminControlDisabled"
         >
           <mat-icon>edit</mat-icon>
         </button>
@@ -48,7 +48,7 @@
           mat-icon-button
           color="warn"
           (click)="handleDeleteShow(element)"
-          [disabled]="readonly"
+          [disabled]="adminControlDisabled"
         >
           <mat-icon>delete</mat-icon>
         </button>
