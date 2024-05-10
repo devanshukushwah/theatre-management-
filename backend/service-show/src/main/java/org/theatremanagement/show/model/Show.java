@@ -19,7 +19,5 @@ public class Show {
     private Date endTime;
     private long movieId;
     private String movieName;
-    private int totalSeats;
-    private int bookedSeats;
     private String status;
 }

@@ -5,7 +5,6 @@
     <!-- Define your SQL queries -->
     <resultMap id="getAllShowsResultMap" type="org.theatremanagement.show.model.Show">
         <result column="id" property="id" />
-        <result column="booked_seats" property="bookedSeats" />
         <result column="start_time" property="startTime" />
         <result column="end_time" property="endTime" />
         <result column="movie_id" property="movieId" />
@@ -14,15 +13,15 @@
     </resultMap>
 
     <select id="getAllShows" parameterType="java.util.Map" resultMap="getAllShowsResultMap">
-        select s.id, s.start_time , s.end_time , s.total_seats , s.booked_seats, s.movie_id , s.movie_name,
+        select s.id, s.start_time , s.end_time , s.movie_id , m."name" as movie_name,
         case
             when (bs.id is not null) then 'Booked'
             when (s.end_time &lt; current_timestamp at time zone 'utc') then 'Ended'
-            when (s.total_seats &gt; s.booked_seats) then 'Available'
-            when (s.total_seats &lt;= booked_seats) then 'Sold Out'
+            when (s.end_time &gt; current_timestamp at time zone 'utc') then 'Available'
             else 'Status Unknown'
         end as status
         from show s
+        inner join movie m on m.id = s.movie_id
         left join book_show bs on s.id = bs.show_id and bs.user_id = #{userId}
         <where>
             <if test="params != null and params.size() > 0">
@@ -79,22 +78,20 @@
     </select>
 
     <select id="getShowById" parameterType="java.lang.Long" resultType="org.theatremanagement.show.model.Show">
-        SELECT * FROM SHOW WHERE ID = #{id}
+        SELECT s.*, m."name" as movie_name  FROM SHOW s inner join MOVIE m ON m.id = s.movie_id WHERE s.ID = #{id}
     </select>
 
     <update id="create" parameterType="org.theatremanagement.show.model.Show">
-        insert into SHOW(MOVIE_NAME, MOVIE_ID, start_time, end_time, total_seats, booked_seats)
-        values (#{movieName}, #{movieId}, #{startTime}, #{endTime}, #{totalSeats}, #{bookedSeats})
+        insert into SHOW(MOVIE_ID, start_time, end_time)
+        values (#{movieId}, #{startTime}, #{endTime})
     </update>
 
     <update id="update" parameterType="org.theatremanagement.show.model.Show">
         update show
-        set movie_name = #{movieName},
+        set
         movie_id = #{movieId},
         start_time = #{startTime},
-        end_time = #{endTime},
-        total_seats = #{totalSeats},
-        booked_seats = #{bookedSeats}
+        end_time = #{endTime}
         where id = #{id}
     </update>
 

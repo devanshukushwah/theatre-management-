@@ -41,12 +41,6 @@ export class ShowPageComponent implements OnInit {
       order: 4,
       width: '20%',
     },
-    {
-      name: 'Seats',
-      ref: 'seatInfo',
-      order: 5,
-      width: '5%',
-    },
   ];
 
   displayedColumns: string[] = [
@@ -54,7 +48,6 @@ export class ShowPageComponent implements OnInit {
     'duration',
     'startTime',
     'endTime',
-    'seats',
     'book',
   ];
 
@@ -85,7 +78,6 @@ export class ShowPageComponent implements OnInit {
             item.endTime,
             item.startTime
           ) + ' min',
-        seatInfo: this.getSeatInfo(item),
         status: item.status === 'Available' ? 'Book Now' : item.status,
         bookNowDisabled: item.status === 'Booked',
       };
@@ -123,15 +115,6 @@ export class ShowPageComponent implements OnInit {
         this.inProgressShows = this.formShowTableData(res.data);
       }
     });
-  }
-
-  getSeatInfo(show: Show): string {
-    if (show.bookedSeats >= 0 && show.totalSeats >= 0) {
-      const remSeats: number = show.totalSeats - show.bookedSeats;
-      return remSeats.toString();
-    }
-
-    return '';
   }
 
   handleDeleteShow(show: Show): void {

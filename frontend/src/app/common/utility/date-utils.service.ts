@@ -40,4 +40,20 @@ export class DateUtilsService {
   dateInterceptor(date: any): any {
     return new Date(date).toISOString();
   }
+
+  onMinuteChange(callback: any) {
+    const checkMinute = () => {
+      let firstTime = true;
+      const currentSecond = new Date().getSeconds();
+      const remainingSeconds = 60 - currentSecond;
+
+      if (!firstTime) {
+        callback();
+      }
+      firstTime = false;
+      setTimeout(checkMinute, remainingSeconds * 1000);
+    };
+
+    checkMinute();
+  }
 }

@@ -4,8 +4,6 @@ export interface Show {
   endTime: string | null | undefined;
   duration: number | null | undefined;
   movieId?: number | null | undefined;
-  movieName: string | null | undefined;
-  totalSeats: number;
-  bookedSeats: number;
+  movieName?: string | null | undefined;
   status?: string;
 }

@@ -44,6 +44,8 @@ import { SearchMovieDialogComponent } from './components/search-movie-dialog/sea
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { GenericTableComponent } from './components/generic-table/generic-table.component';
+import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
     EditProfileDialogComponent,
     SearchMovieDialogComponent,
     GenericTableComponent,
+    BookShowPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +92,7 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
     MatTableModule,
     MatListModule,
     MatDividerModule,
+    MatStepperModule,
   ],
   providers: [
     HttpUrlsService,

@@ -52,8 +52,6 @@ public class ShowServiceImpl implements ShowService {
         if(show != null && movie != null) {
             Show onlyAttributeShow = new Show();
             onlyAttributeShow.setStartTime(show.getStartTime());;
-            onlyAttributeShow.setTotalSeats(show.getTotalSeats());
-            onlyAttributeShow.setBookedSeats(show.getBookedSeats());
             onlyAttributeShow.setMovieId(show.getMovieId());
             processShowForMovie(onlyAttributeShow, movie);
             return this.showMapper.create(onlyAttributeShow) > 0;
@@ -68,8 +66,6 @@ public class ShowServiceImpl implements ShowService {
         Movie movie =  movieResponse.getData();
         if(existingShow != null && movie != null) {
             existingShow.setStartTime(show.getStartTime());
-            existingShow.setTotalSeats(show.getTotalSeats());
-            existingShow.setBookedSeats(show.getBookedSeats());
             existingShow.setMovieId(show.getMovieId());
             processShowForMovie(existingShow, movie);
             return this.showMapper.update(existingShow) > 0;

@@ -13,6 +13,7 @@ import { EditMoviePageComponent } from './pages/edit-movie-page/edit-movie-page.
 import { UnknownPageComponent } from './pages/unknown-page/unknown-page.component';
 import { AddShowPageComponent } from './pages/add-show-page/add-show-page.component';
 import { EditShowPageComponent } from './pages/edit-show-page/edit-show-page.component';
+import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     component: AddShowPageComponent,
     path: 'show/add',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: BookShowPageComponent,
+    path: 'book-show',
     canActivate: [AuthGuard],
   },
   {

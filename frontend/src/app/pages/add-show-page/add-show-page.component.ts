@@ -25,9 +25,6 @@ export class AddShowPageComponent implements OnInit {
       startTime: null,
       endTime: null,
       duration: null,
-      movieName: null,
-      totalSeats: 1,
-      bookedSeats: 0,
     };
   }
 
