@@ -3,7 +3,8 @@
   <mat-card class="mat-elevation-z">
     <mat-card-title>{{ show.movieName }}</mat-card-title>
     <mat-card-subtitle
-      >{{ show.startTime }} | {{ show.endTime }}</mat-card-subtitle
+      >{{ dateUtil.getDateAndTime(show.startTime) }} -
+      {{ dateUtil.getDateAndTime(show.endTime) }}</mat-card-subtitle
     >
 
     <div class="d-flex justify-content-end">

@@ -13,6 +13,12 @@ export class DateUtilsService {
     return `${hours}h ${minutes}m`;
   }
 
+  /**
+   * Method to change date format and timezone
+   * Scope - ALL OVER APPLICATION
+   * @param dateAndTime
+   * @returns
+   */
   getDateAndTime(dateAndTime: any) {
     const date = new Date(dateAndTime).toLocaleString();
 
@@ -37,10 +43,16 @@ export class DateUtilsService {
     }
   }
 
+  /**
+   * To change client system date into GMT/UTC Timezone
+   */
   dateInterceptor(date: any): any {
     return new Date(date).toISOString();
   }
 
+  /**
+   *
+   */
   onMinuteChange(callback: any) {
     const checkMinute = () => {
       let firstTime = true;
