@@ -44,7 +44,8 @@ body {
   padding-top: 1rem;
 }
 
-.jc-end {
+.jc-end,
+.justify-content-end {
   justify-content: end;
 }
 

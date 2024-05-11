@@ -1,22 +1,15 @@
 <div class="p-1">
   <h2>Book your show</h2>
-  <mat-stepper [linear]="true" #stepper>
-    <mat-step>
-      <ng-template matStepLabel>Please select total seats</ng-template>
-      <p>First</p>
-      <button mat-button matStepperNext>Next</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Choose your class</ng-template>
-      <p>Second</p>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Payment</ng-template>
-      <p>Last</p>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button color="primary">Book Now</button>
-    </mat-step>
-  </mat-stepper>
+  <mat-card class="mat-elevation-z">
+    <mat-card-title>{{ show.movieName }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ show.startTime }} | {{ show.endTime }}</mat-card-subtitle
+    >
+
+    <div class="d-flex justify-content-end">
+      <button mat-flat-button color="primary" (click)="handleBookShow(show)">
+        Book Show
+      </button>
+    </div>
+  </mat-card>
 </div>

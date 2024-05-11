@@ -66,7 +66,7 @@ const routes: Routes = [
   },
   {
     component: BookShowPageComponent,
-    path: 'book-show',
+    path: 'book-show/:id',
     canActivate: [AuthGuard],
   },
   {

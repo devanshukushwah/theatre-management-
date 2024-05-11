@@ -45,7 +45,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { GenericTableComponent } from './components/generic-table/generic-table.component';
 import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
-import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -92,7 +91,6 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatTableModule,
     MatListModule,
     MatDividerModule,
-    MatStepperModule,
   ],
   providers: [
     HttpUrlsService,

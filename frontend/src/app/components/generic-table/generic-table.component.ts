@@ -21,7 +21,6 @@ export class GenericTableComponent implements OnInit {
 
   @Input() noRecordFoundLabel: string = 'No records found';
 
-  @Output() handleBookShowEvent: EventEmitter<Show> = new EventEmitter<Show>();
   @Output() handleDeleteShowEvent: EventEmitter<Show> =
     new EventEmitter<Show>();
 
@@ -49,9 +48,6 @@ export class GenericTableComponent implements OnInit {
     });
   }
 
-  handleBookShow(show: Show): void {
-    this.handleBookShowEvent.emit(show);
-  }
   handleDeleteShow(show: Show): void {
     this.handleDeleteShowEvent.emit(show);
   }

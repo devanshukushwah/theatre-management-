@@ -25,7 +25,7 @@
         mat-flat-button
         color="primary"
         [disabled]="bookNowDisabled || element.bookNowDisabled"
-        (click)="handleBookShow(element)"
+        [routerLink]="'/book-show/' + element.id"
       >
         {{ element.status }}
       </button>
