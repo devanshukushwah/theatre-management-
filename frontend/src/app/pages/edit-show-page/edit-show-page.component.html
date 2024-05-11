@@ -1,9 +1,11 @@
 <div class="p-1">
   <h2>Edit Show</h2>
-  <app-form-show
-    [show]="show"
-    (handleSubmitEvent)="handleEditShow($event)"
-    buttonLabel="Update Show"
-  >
-  </app-form-show>
+  <mat-card class="mat-elevation-z">
+    <app-form-show
+      [show]="show"
+      (handleSubmitEvent)="handleEditShow($event)"
+      buttonLabel="Update Show"
+    >
+    </app-form-show>
+  </mat-card>
 </div>

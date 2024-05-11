@@ -5,28 +5,32 @@
       <mat-icon>edit</mat-icon>
     </button>
   </div>
-  <app-profile-field
-    title="Firstname"
-    [value]="userProfile && userProfile.firstName"
-  ></app-profile-field>
   <br />
-  <app-profile-field
-    title="Lastname"
-    [value]="userProfile && userProfile.lastName"
-  ></app-profile-field>
-  <br />
-  <app-profile-field
-    title="Phone number"
-    [value]="userProfile && userProfile.phoneNumber"
-  ></app-profile-field>
-  <br />
-  <app-profile-field
-    title="Age"
-    [value]="userProfile && userProfile.age"
-  ></app-profile-field>
-  <br />
-  <app-profile-field
-    title="Gender"
-    [value]="userProfile && userProfile.gender"
-  ></app-profile-field>
+
+  <mat-card class="mat-elevation-z">
+    <app-profile-field
+      title="Firstname"
+      [value]="userProfile && userProfile.firstName"
+    ></app-profile-field>
+    <br />
+    <app-profile-field
+      title="Lastname"
+      [value]="userProfile && userProfile.lastName"
+    ></app-profile-field>
+    <br />
+    <app-profile-field
+      title="Phone number"
+      [value]="userProfile && userProfile.phoneNumber"
+    ></app-profile-field>
+    <br />
+    <app-profile-field
+      title="Age"
+      [value]="userProfile && userProfile.age"
+    ></app-profile-field>
+    <br />
+    <app-profile-field
+      title="Gender"
+      [value]="userProfile && userProfile.gender"
+    ></app-profile-field>
+  </mat-card>
 </div>

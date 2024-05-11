@@ -46,7 +46,9 @@
     <input matInput name="director" [(ngModel)]="movie.director" required />
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit">
-    {{ buttonLabel }}
-  </button>
+  <div class="d-flex justify-content-end">
+    <button mat-flat-button color="primary" type="submit">
+      {{ buttonLabel }}
+    </button>
+  </div>
 </form>

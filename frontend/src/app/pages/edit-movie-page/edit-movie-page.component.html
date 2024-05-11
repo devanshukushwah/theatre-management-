@@ -1,8 +1,11 @@
 <div class="p-1">
   <h2>Edit Movie</h2>
-  <app-form-movie
-    [movie]="movie"
-    (handleSubmitEvent)="handleEditMovie($event)"
-    buttonLabel="Update Movie"
-  ></app-form-movie>
+
+  <mat-card class="mat-elevation-z">
+    <app-form-movie
+      [movie]="movie"
+      (handleSubmitEvent)="handleEditMovie($event)"
+      buttonLabel="Update Movie"
+    ></app-form-movie>
+  </mat-card>
 </div>
