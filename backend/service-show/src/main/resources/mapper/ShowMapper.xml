@@ -15,8 +15,8 @@
     <select id="getAllShows" parameterType="java.util.Map" resultMap="getAllShowsResultMap">
         select s.id, s.start_time , s.end_time , s.movie_id , m."name" as movie_name,
         case
-            when (bs.id is not null) then 'Booked'
             when (s.end_time &lt; current_timestamp at time zone 'utc') then 'Ended'
+            when (bs.id is not null) then 'Booked'
             when (s.end_time &gt; current_timestamp at time zone 'utc') then 'Available'
             else 'Status Unknown'
         end as status

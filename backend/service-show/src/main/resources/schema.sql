@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS show (
     START_TIME TIMESTAMP NOT NULL,
     END_TIME TIMESTAMP NOT NULL,
     MOVIE_ID BIGINT NOT NULL,
-    MOVIE_NAME VARCHAR(255) NOT NULL,
     CREATED_DATE TIMESTAMP without time zone NOT NULL
        DEFAULT (current_timestamp AT TIME ZONE 'UTC')
 );
@@ -17,3 +16,13 @@ CREATE TABLE IF NOT EXISTS book_show (
     CREATED_DATE TIMESTAMP without time zone NOT NULL
        DEFAULT (current_timestamp AT TIME ZONE 'UTC')
 );
+
+
+CREATE TABLE IF NOT EXISTS movie
+(
+    id SERIAL PRIMARY KEY,
+    actors VARCHAR(255),
+    director VARCHAR(255),
+    duration bigint NOT NULL,
+    "name" VARCHAR(255)
+)
