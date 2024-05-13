@@ -1,5 +1,8 @@
 package org.theatremanagement.show;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -9,8 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.theatremanagement.show.mapper.ShowMapper;
 import org.theatremanagement.show.model.Show;
 
+import javax.sql.DataSource;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +27,14 @@ public class MyBatisMapperTests {
     @Autowired
     ShowMapper showMapper;
 
+    @Autowired
+    private DataSource dataSource;
+
+    private void executeQuery(String sql) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.execute(sql);
+    }
+
     @Test
     @DisplayName("mapper to add new show")
     public void testAddShow() {
@@ -31,19 +44,47 @@ public class MyBatisMapperTests {
     }
 
     @Test
-    @DisplayName("mapper to get all show based on filter")
+    @DisplayName("mapper to get all show basic test")
     public void testGetAllShow() {
+        executeQuery("INSERT INTO MOVIE(id, actors, director, \"name\", duration) values (1, 'test', 'test', 'test', 1)");
+        executeQuery("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1)");
+        executeQuery("INSERT INTO BOOK_SHOW(id, show_id, user_id) VALUES (1, 1, 1)");
+
         assertDoesNotThrow(() -> {
-            List<Show> allShows = showMapper.getAllShows(1L, null);
+            List<Show> shows = showMapper.getAllShows(1L, null);
+            assertTrue(shows.size() > 0);
         });
     }
+
+    @Nested
+    @DisplayName("mapper to getAllShow test status field")
+    class TestStatus{
+        @Test
+        @DisplayName("status=Ended")
+        public void testGetAllShowStatusEnded() {
+            executeQuery("INSERT INTO MOVIE(id, actors, director, \"name\", duration) values (1, 'test', 'test', 'test', 1)");
+            executeQuery("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (1, '2024-01-12 08:31:00', '2024-01-12 11:31:00', 1)");
+            executeQuery("INSERT INTO BOOK_SHOW(id, show_id, user_id) VALUES (1, 1, 1)");
+
+            assertDoesNotThrow(() -> {
+                Optional<Show> shows = showMapper.getAllShows(1L, null).stream().findFirst();
+                assertTrue(shows.isPresent());
+
+                if(shows.isPresent()) {
+                    String status = shows.get().getStatus();
+                    assertTrue(status.equalsIgnoreCase("Ended"));
+                }
+            });
+        }
+    }
+
 
     @Test
     @DisplayName("mapper to delete show by id")
     public void testDeleteShowById() {
-        assertDoesNotThrow(() -> {
-            showMapper.deleteShowById(1L);
-        });
+        this.executeQuery("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1)");
+        int row = showMapper.deleteShowById(5L);
+        assertTrue(row > 0);
     }
 
     @Test

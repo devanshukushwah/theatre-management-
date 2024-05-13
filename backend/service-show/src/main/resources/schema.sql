@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS movie
     director VARCHAR(255),
     duration bigint NOT NULL,
     "name" VARCHAR(255)
-)
+);
