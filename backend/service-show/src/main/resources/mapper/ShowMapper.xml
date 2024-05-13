@@ -15,9 +15,9 @@
     <select id="getAllShows" parameterType="java.util.Map" resultMap="getAllShowsResultMap">
         select s.id, s.start_time , s.end_time , s.movie_id , m."name" as movie_name,
         case
-            when (s.end_time &lt; current_timestamp at time zone 'utc') then 'Ended'
+            when (s.end_time &lt; current_timestamp) then 'Ended'
             when (bs.id is not null) then 'Booked'
-            when (s.end_time &gt; current_timestamp at time zone 'utc') then 'Available'
+            when (s.end_time &gt; current_timestamp) then 'Available'
             else 'Status Unknown'
         end as status
         from show s
@@ -63,13 +63,13 @@
                         and s.end_time &lt; CAST('${value}' AS TIMESTAMP)
                     </if>
                     <if test="key == 'show-status' and value == 'in-progress'">
-                        and s.start_time &lt;= current_timestamp at time zone 'utc' and s.end_time &gt;= current_timestamp at time zone 'utc'
+                        and s.start_time &lt;= current_timestamp and s.end_time &gt;= current_timestamp
                     </if>
                     <if test="key == 'show-status' and value == 'not-started'">
-                        and s.start_time &gt; current_timestamp at time zone 'utc'
+                        and s.start_time &gt; current_timestamp
                     </if>
                     <if test="key == 'show-status' and value == 'completed'">
-                        and s.end_time &lt; current_timestamp at time zone 'utc'
+                        and s.end_time &lt; current_timestamp
                     </if>
                 </foreach>
             </if>
