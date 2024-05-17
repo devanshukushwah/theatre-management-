@@ -1,11 +1,7 @@
 <div class="p-1">
   <h2>Book your show</h2>
   <mat-card class="mat-elevation-z">
-    <mat-card-title>{{ show.movieName }}</mat-card-title>
-    <mat-card-subtitle
-      >{{ dateUtil.getDateAndTime(show.startTime) }} -
-      {{ dateUtil.getDateAndTime(show.endTime) }}</mat-card-subtitle
-    >
+    <app-general-fields [data]="showFields"></app-general-fields>
 
     <div class="d-flex justify-content-end">
       <button mat-flat-button color="primary" (click)="handleBookShow(show)">

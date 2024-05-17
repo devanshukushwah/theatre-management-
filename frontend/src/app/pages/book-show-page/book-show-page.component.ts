@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Show } from 'src/app/common/interface/Show';
+import { GenericField } from 'src/app/common/interface/GeneralField';
 import { DateUtilsService } from 'src/app/common/utility/date-utils.service';
 import { RouterService } from 'src/app/services/router.service';
 import { ShowService } from 'src/app/services/show.service';
@@ -12,6 +13,7 @@ import { ShowService } from 'src/app/services/show.service';
 })
 export class BookShowPageComponent implements OnInit {
   show!: Show;
+  showFields: GenericField[] = [];
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -30,8 +32,28 @@ export class BookShowPageComponent implements OnInit {
     this.showService.getShowById(id).subscribe((res) => {
       if (res?.data) {
         this.show = res.data;
+        this.renderFields(res.data);
       }
     });
+  }
+
+  renderFields(show: Show): void {
+    const data: GenericField[] = [
+      {
+        title: 'Movie Name',
+        value: show.movieName || '',
+      },
+      {
+        title: 'Start Time',
+        value: this.dateUtil.getDateAndTime(show.startTime) || '',
+      },
+      {
+        title: 'End Time',
+        value: this.dateUtil.getDateAndTime(show.endTime) || '',
+      },
+    ];
+
+    this.showFields = data;
   }
 
   handleBookShow(show: Show): void {

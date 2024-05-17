@@ -45,6 +45,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { GenericTableComponent } from './components/generic-table/generic-table.component';
 import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
+import { GeneralFieldsComponent } from './components/general-fields/general-fields.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { BookShowPageComponent } from './pages/book-show-page/book-show-page.com
     SearchMovieDialogComponent,
     GenericTableComponent,
     BookShowPageComponent,
+    GeneralFieldsComponent,
   ],
   imports: [
     BrowserModule,
