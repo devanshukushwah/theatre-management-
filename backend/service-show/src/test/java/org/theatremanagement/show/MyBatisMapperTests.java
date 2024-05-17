@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.theatremanagement.show.mapper.ShowMapper;
 import org.theatremanagement.show.model.Show;
+import org.theatremanagement.show.util.DateUtil;
 
 import javax.sql.DataSource;
 import java.util.Date;
@@ -73,6 +74,55 @@ public class MyBatisMapperTests {
                 if(shows.isPresent()) {
                     String status = shows.get().getStatus();
                     assertTrue(status.equalsIgnoreCase("Ended"));
+                }
+            });
+        }
+
+        @Test
+        @DisplayName("status=Booked")
+        public void testGetAllShowStatusBooked() {
+            // Given
+            String nextDay = DateUtil.getCurrentTimeAdjustedByDays(1);
+            String nextNextDay = DateUtil.getCurrentTimeAdjustedByDays(2);
+
+            String showQuery = String.format("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (1, '%s', '%s', 1)", nextDay, nextNextDay);
+
+            // setup db data
+            executeQuery("INSERT INTO MOVIE(id, actors, director, \"name\", duration) values (1, 'test', 'test', 'test', 1)");
+            executeQuery(showQuery);
+            executeQuery("INSERT INTO BOOK_SHOW(id, show_id, user_id) VALUES (1, 1, 1)");
+
+            assertDoesNotThrow(() -> {
+                Optional<Show> shows = showMapper.getAllShows(1L, null).stream().findFirst();
+                assertTrue(shows.isPresent());
+
+                if(shows.isPresent()) {
+                    String status = shows.get().getStatus();
+                    assertTrue(status.equalsIgnoreCase("Booked"));
+                }
+            });
+        }
+
+        @Test
+        @DisplayName("status=Available")
+        public void testGetAllShowStatusAvailable() {
+            // Given
+            String nextDay = DateUtil.getCurrentTimeAdjustedByDays(1);
+            String nextNextDay = DateUtil.getCurrentTimeAdjustedByDays(2);
+
+            String showQuery = String.format("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (1, '%s', '%s', 1)", nextDay, nextNextDay);
+
+            // setup db data
+            executeQuery("INSERT INTO MOVIE(id, actors, director, \"name\", duration) values (1, 'test', 'test', 'test', 1)");
+            executeQuery(showQuery);
+
+            assertDoesNotThrow(() -> {
+                Optional<Show> shows = showMapper.getAllShows(1L, null).stream().findFirst();
+                assertTrue(shows.isPresent());
+
+                if(shows.isPresent()) {
+                    String status = shows.get().getStatus();
+                    assertTrue(status.equalsIgnoreCase("Available"));
                 }
             });
         }
