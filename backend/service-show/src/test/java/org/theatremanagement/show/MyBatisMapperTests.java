@@ -138,6 +138,14 @@ public class MyBatisMapperTests {
     }
 
     @Test
+    @DisplayName("mapper to delete show by id (negative scenario)")
+    public void _testDeleteShowById() {
+        this.executeQuery("INSERT INTO SHOW(id, start_time, end_time, movie_id) VALUES (5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1)");
+        int row = showMapper.deleteShowById(1L);
+        assertTrue(row == 0);
+    }
+
+    @Test
     @DisplayName("mapper to get show by id")
     public void testGetShowById() {
         assertDoesNotThrow(() -> {
