@@ -12,4 +12,42 @@
         values(#{showId}, #{userId})
     </insert>
 
+    <resultMap id="bookDetailResultMap" type="org.theatremanagement.show.model.BookDetail">
+        <association property="show" javaType="org.theatremanagement.show.model.Show">
+            <id property="id" column="show_id"/>
+            <result property="startTime" column="start_time"/>
+            <result property="endTime" column="end_time"/>
+            <result property="createdDate" column="show_created_date"/>
+        </association>
+        <association property="movie" javaType="org.theatremanagement.show.model.Movie">
+            <id property="id" column="movie_id"/>
+            <result property="name" column="movie_name"/>
+        </association>
+        <association property="bookShow" javaType="org.theatremanagement.show.model.BookShow">
+            <id property="id" column="book_id"/>
+            <result property="createdDate" column="book_created_date"/>
+        </association>
+    </resultMap>
+
+    <select id="getBookDetail" resultMap="bookDetailResultMap" parameterType="java.lang.Long">
+        select
+        s.id as show_id,
+        s.start_time,
+        s.end_time,
+        s.created_date as show_created_date,
+        s.movie_id,
+        m."name" as movie_name,
+        bs.id as book_id,
+        bs.created_date as book_created_date
+        from
+        show s
+        inner join movie m on
+        m.id = s.movie_id
+        inner join book_show bs on
+        bs.show_id = s.id
+        where
+        s.id = #{showId}
+        and bs.user_id = #{userId};
+    </select>
+
 </mapper>

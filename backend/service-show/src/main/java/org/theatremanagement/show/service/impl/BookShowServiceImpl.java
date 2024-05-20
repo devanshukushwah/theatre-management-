@@ -6,6 +6,7 @@ import org.theatremanagement.show.exception.ShowAlreadyBookedException;
 import org.theatremanagement.show.exception.ShowSoldOutException;
 import org.theatremanagement.show.mapper.BookShowMapper;
 import org.theatremanagement.show.mapper.ShowMapper;
+import org.theatremanagement.show.model.BookDetail;
 import org.theatremanagement.show.model.BookShow;
 import org.theatremanagement.show.service.BookShowService;
 
@@ -26,5 +27,10 @@ public class BookShowServiceImpl implements BookShowService {
         // save book show object.
         BookShow bookShow = BookShow.builder().showId(showId).userId(userId).build();
         return this.bookShowMapper.create(bookShow) > 0;
+    }
+
+    @Override
+    public BookDetail getBookDetail(long showId, long userId) {
+        return this.bookShowMapper.getBookDetail(showId, userId);
     }
 }

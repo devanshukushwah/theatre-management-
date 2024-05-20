@@ -20,4 +20,5 @@ public class Show {
     private long movieId;
     private String movieName;
     private String status;
+    private Date createdDate;
 }

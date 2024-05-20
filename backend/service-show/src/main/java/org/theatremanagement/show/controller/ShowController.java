@@ -7,6 +7,7 @@ import org.theatremanagement.show.constant.ApplicationConstant;
 import org.theatremanagement.show.constant.ApplicationMessage;
 import org.theatremanagement.show.exception.ShowAlreadyBookedException;
 import org.theatremanagement.show.exception.ShowSoldOutException;
+import org.theatremanagement.show.model.BookDetail;
 import org.theatremanagement.show.model.Show;
 import org.theatremanagement.show.model.domain.CustomResponse;
 import org.theatremanagement.show.service.BookShowService;
@@ -66,6 +67,16 @@ public class ShowController extends BaseController {
             return getResponseEntityOK(true, ApplicationMessage.SHOW_SUCCESSFULLY_BOOKED.getMessage());
         } else {
             return getResponseEntityFailed(false, ApplicationMessage.UNABLE_TO_BOOK_SHOW.getMessage());
+        }
+    }
+
+    @GetMapping("/book-detail/{showId}")
+    ResponseEntity<CustomResponse> bookDetail(@PathVariable("showId") long showId, @RequestHeader(value = "x-app-userId") Long userId) {
+        BookDetail bookDetail = bookShowService.getBookDetail(showId, userId);
+        if (bookDetail != null) {
+            return getResponseEntityOK(bookDetail);
+        } else {
+            return getResponseEntityFailed(null, ApplicationMessage.BOOK_DETAIL_NOT_FOUND.getMessage());
         }
     }
 }

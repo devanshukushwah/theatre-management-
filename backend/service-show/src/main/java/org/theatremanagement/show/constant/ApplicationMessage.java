@@ -9,6 +9,7 @@ public enum ApplicationMessage {
     UNABLE_TO_DELETE_SHOW("Unable to delete show"),
     SHOW_DELETED_SUCCESSFULLY("Show deleted successfully"),
     SHOW_SUCCESSFULLY_BOOKED("Show successfully booked"),
+    BOOK_DETAIL_NOT_FOUND("Book detail not found"),
     UNABLE_TO_BOOK_SHOW("Unable to book show");
 
     private String message;

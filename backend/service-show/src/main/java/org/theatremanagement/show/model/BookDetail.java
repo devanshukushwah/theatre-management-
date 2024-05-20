@@ -11,11 +11,9 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookShow {
-
-    private long id;
-    private long showId;
-    private long userId;
-    private Date createdDate;
+public class BookDetail {
+    private Show show;
+    private Movie movie;
+    private BookShow bookShow;
 
 }
