@@ -18,6 +18,7 @@ export class GenericTableComponent implements OnInit {
   @Input() adminControl: boolean = false;
   @Input() adminControlDisabled: boolean = false;
   @Input() bookNowDisabled: boolean = false;
+  @Input() bookDetail: boolean = false;
 
   @Input() noRecordFoundLabel: string = 'No records found';
 
@@ -31,6 +32,10 @@ export class GenericTableComponent implements OnInit {
 
     if (this.bookButton) {
       this.columnDefination.push('book');
+    }
+
+    if (this.bookDetail) {
+      this.columnDefination.push('bookDetail');
     }
 
     if (this.adminControl) {

@@ -4,6 +4,7 @@
     [config]="showTableConfig"
     [dataSource]="bookedShow"
     noRecordFoundLabel="You haven't booked any show"
+    [bookDetail]="true"
   ></app-generic-table>
   <br />
 
@@ -12,6 +13,7 @@
     [config]="showTableConfig"
     [dataSource]="bookedStartedShow"
     noRecordFoundLabel="There is no show started"
+    [bookDetail]="true"
   ></app-generic-table>
   <br />
   <h2>Watched Shows</h2>
@@ -19,5 +21,6 @@
     [config]="showTableConfig"
     [dataSource]="watchedShow"
     noRecordFoundLabel="You haven't watched any show"
+    [bookDetail]="true"
   ></app-generic-table>
 </div>

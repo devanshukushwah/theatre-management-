@@ -46,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
 import { GenericTableComponent } from './components/generic-table/generic-table.component';
 import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
 import { GeneralFieldsComponent } from './components/general-fields/general-fields.component';
+import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { GeneralFieldsComponent } from './components/general-fields/general-fiel
     GenericTableComponent,
     BookShowPageComponent,
     GeneralFieldsComponent,
+    BookDetailPageComponent,
   ],
   imports: [
     BrowserModule,

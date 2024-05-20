@@ -50,4 +50,8 @@ export class ShowService {
   getAllFilterShow(params: HttpParams): Observable<any> {
     return this.http.get(this.httpUrlsService.getAllFilterShow(), { params });
   }
+
+  getBookDetailByShowId(id: any): Observable<any> {
+    return this.http.get(this.httpUrlsService.getBookDetailByShowId(id));
+  }
 }

@@ -14,6 +14,7 @@ import { UnknownPageComponent } from './pages/unknown-page/unknown-page.componen
 import { AddShowPageComponent } from './pages/add-show-page/add-show-page.component';
 import { EditShowPageComponent } from './pages/edit-show-page/edit-show-page.component';
 import { BookShowPageComponent } from './pages/book-show-page/book-show-page.component';
+import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,11 @@ const routes: Routes = [
   {
     component: BookShowPageComponent,
     path: 'book-show/:id',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: BookDetailPageComponent,
+    path: 'book-detail/:id',
     canActivate: [AuthGuard],
   },
   {
